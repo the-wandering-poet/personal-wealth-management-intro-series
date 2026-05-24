@@ -1,0 +1,4 @@
+*.zip
+.DS_Store
+asset class *.png
+*recreated.png

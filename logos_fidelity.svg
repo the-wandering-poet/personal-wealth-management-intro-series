@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-labelledby="title">
+  <title id="title">Fidelity Investments</title>
+  <rect width="240" height="72" fill="#ffffff"/>
+  <circle cx="31" cy="33" r="25" fill="#f0c400"/>
+  <g stroke="#ffffff" stroke-width="2">
+    <path d="M31 8 L31 58"/><path d="M6 33 L56 33"/><path d="M13 15 L49 51"/><path d="M49 15 L13 51"/>
+    <path d="M21 10 L41 56"/><path d="M41 10 L21 56"/><path d="M8 23 L54 43"/><path d="M54 23 L8 43"/>
+  </g>
+  <text x="143" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="37" font-weight="900" font-style="italic" fill="#087046">Fidelity</text>
+  <text x="143" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="5" fill="#087046">INVESTMENTS</text>
+</svg>

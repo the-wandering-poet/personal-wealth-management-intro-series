@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500">
+<style>text{font-family:Inter,Arial,Helvetica,sans-serif}</style><rect width="100%" height="100%" fill="#fffdf8"/>
+<text x="380.0" y="28.0" font-size="21" fill="#182025" font-weight="760" text-anchor="middle">GP selection matters: dispersion is widest in alternatives</text>
+<text x="380.0" y="50.0" font-size="13" fill="#667077" font-weight="400" text-anchor="middle">Annualized fund return %, 25th-median-75th percentile range</text>
+<line x1="66" y1="392.0" x2="740" y2="392.0" stroke="#e5ddd4" stroke-dasharray="4 6"/>
+<text x="56.0" y="397.0" font-size="12" fill="#667077" font-weight="400" text-anchor="end">0</text>
+<line x1="66" y1="325.2" x2="740" y2="325.2" stroke="#e5ddd4" stroke-dasharray="4 6"/>
+<text x="56.0" y="330.2" font-size="12" fill="#667077" font-weight="400" text-anchor="end">5</text>
+<line x1="66" y1="258.4" x2="740" y2="258.4" stroke="#e5ddd4" stroke-dasharray="4 6"/>
+<text x="56.0" y="263.4" font-size="12" fill="#667077" font-weight="400" text-anchor="end">10</text>
+<line x1="66" y1="191.6" x2="740" y2="191.6" stroke="#e5ddd4" stroke-dasharray="4 6"/>
+<text x="56.0" y="196.6" font-size="12" fill="#667077" font-weight="400" text-anchor="end">15</text>
+<line x1="66" y1="124.8" x2="740" y2="124.8" stroke="#e5ddd4" stroke-dasharray="4 6"/>
+<text x="56.0" y="129.8" font-size="12" fill="#667077" font-weight="400" text-anchor="end">20</text>
+<line x1="66" y1="58.0" x2="740" y2="58.0" stroke="#e5ddd4" stroke-dasharray="4 6"/>
+<text x="56.0" y="63.0" font-size="12" fill="#667077" font-weight="400" text-anchor="end">25</text>
+<line x1="66" y1="58" x2="66" y2="392" stroke="#3a4146"/>
+<line x1="66" y1="392" x2="740" y2="392" stroke="#3a4146"/>
+<rect x="87.7" y="363.9" width="24" height="16.0" fill="#0b61a8" opacity="0.68"/>
+<circle cx="99.7" cy="373.3" r="4.5" fill="#072b5f"/>
+<text x="99.7" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Fixed</text>
+<text x="99.7" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Income</text>
+<rect x="155.1" y="222.3" width="24" height="46.8" fill="#0b61a8" opacity="0.68"/>
+<circle cx="167.1" cy="245.0" r="4.5" fill="#072b5f"/>
+<text x="167.1" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Public</text>
+<text x="167.1" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Equities</text>
+<rect x="222.5" y="100.8" width="24" height="193.7" fill="#ffbd62" opacity="0.68"/>
+<circle cx="234.5" cy="210.3" r="4.5" fill="#072b5f"/>
+<text x="234.5" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Buyout /</text>
+<text x="234.5" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Growth</text>
+<rect x="289.9" y="74.0" width="24" height="292.6" fill="#ffbd62" opacity="0.68"/>
+<circle cx="301.9" cy="249.0" r="4.5" fill="#072b5f"/>
+<text x="301.9" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Venture</text>
+<text x="301.9" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Capital</text>
+<rect x="357.3" y="122.1" width="24" height="129.6" fill="#ffbd62" opacity="0.68"/>
+<circle cx="369.3" cy="190.3" r="4.5" fill="#072b5f"/>
+<text x="369.3" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Secondaries</text>
+<rect x="424.7" y="235.7" width="24" height="64.1" fill="#865ed6" opacity="0.68"/>
+<circle cx="436.7" cy="267.8" r="4.5" fill="#072b5f"/>
+<text x="436.7" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Direct</text>
+<text x="436.7" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Lending</text>
+<rect x="492.1" y="211.6" width="24" height="82.8" fill="#865ed6" opacity="0.68"/>
+<circle cx="504.1" cy="258.4" r="4.5" fill="#072b5f"/>
+<text x="504.1" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Mezzanine</text>
+<rect x="559.5" y="128.8" width="24" height="165.7" fill="#865ed6" opacity="0.68"/>
+<circle cx="571.5" cy="231.7" r="4.5" fill="#072b5f"/>
+<text x="571.5" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Special Sits /</text>
+<text x="571.5" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Distressed</text>
+<rect x="626.9" y="206.3" width="24" height="105.5" fill="#1699d6" opacity="0.68"/>
+<circle cx="638.9" cy="267.8" r="4.5" fill="#072b5f"/>
+<text x="638.9" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Core / Core</text>
+<text x="638.9" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Plus</text>
+<rect x="694.3" y="143.5" width="24" height="179.0" fill="#1699d6" opacity="0.68"/>
+<circle cx="706.3" cy="231.7" r="4.5" fill="#072b5f"/>
+<text x="706.3" y="416.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Value</text>
+<text x="706.3" y="428.0" font-size="10" fill="#182025" font-weight="650" text-anchor="middle">Added</text>
+<rect x="66.0" y="442" width="134.8" height="20" rx="5" fill="#0b61a8" opacity="0.92"/>
+<text x="133.4" y="457.0" font-size="10" fill="#ffffff" font-weight="760" text-anchor="middle">Traditional</text>
+<rect x="200.8" y="442" width="202.2" height="20" rx="5" fill="#ffbd62" opacity="0.92"/>
+<text x="301.9" y="457.0" font-size="10" fill="#ffffff" font-weight="760" text-anchor="middle">PE/VC</text>
+<rect x="403.0" y="442" width="202.2" height="20" rx="5" fill="#865ed6" opacity="0.92"/>
+<text x="504.1" y="457.0" font-size="10" fill="#ffffff" font-weight="760" text-anchor="middle">Private Debt</text>
+<rect x="605.2" y="442" width="134.8" height="20" rx="5" fill="#1699d6" opacity="0.92"/>
+<text x="672.6" y="457.0" font-size="10" fill="#ffffff" font-weight="760" text-anchor="middle">Real Estate</text>
+<text x="66.0" y="486.0" font-size="11" fill="#667077" font-weight="400" text-anchor="start">Source: supplied manager dispersion chart; hedge fund category removed; simplified.</text>
+</svg>

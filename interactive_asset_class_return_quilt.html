@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interactive Asset Class Return Quilt</title>
+<style>
+  :root { --ink: #14191f; --muted: #5d6670; --panel: #ffffff; --line: #d8dde2; --select: #1677ff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; overflow: hidden; }
+  .wrap { max-width: 1800px; margin: 0 auto; padding: 8px 10px 6px; }
+  .header { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-bottom: 4px; }
+  h1, .sub { display: none; }
+  .controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+  .status { font-size: 14px; font-weight: 700; color: #1e2a35; min-width: 210px; text-align: right; }
+  button { border: 1px solid #bcc7d3; background: #fff; color: #1c2733; border-radius: 6px; padding: 5px 9px; font-weight: 700; cursor: pointer; }
+  button:hover { border-color: #8292a3; }
+  .stage { background: var(--panel); border: 0; border-radius: 0; overflow: hidden; box-shadow: none; }
+  svg { display: block; width: 100%; height: calc(100vh - 42px); }
+  text { font-family: Arial, Helvetica, sans-serif; }
+  .cell-text { font-size: 12px; font-weight: 700; pointer-events: none; }
+  .year-label { font-size: 16px; font-weight: 700; pointer-events: none; }
+  .column-hit { fill: transparent; cursor: pointer; }
+  .year-column:hover .column-outline { stroke: #7aaeff; stroke-width: 2; opacity: 1; }
+  .year-column.selected .column-outline { stroke: var(--select); stroke-width: 3; opacity: 1; }
+  .year-column.in-range .range-bg { fill: #eaf3ff; opacity: .72; }
+  .column-outline { fill: none; stroke: transparent; opacity: 0; pointer-events: none; }
+  .range-bg { fill: transparent; pointer-events: none; }
+  .computed-bg { fill: #f4f0f7; opacity: .95; }
+  .computed-title { font-size: 14px; font-weight: 700; fill: #5a2c75; pointer-events: none; }
+  .legend { font-size: 17px; }
+  .legend .prefix { font-weight: 700; }
+  .source { font-size: 12px; fill: #4f5963; }
+  .note { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div>
+      <h1>Asset Class Return Quilt</h1>
+      <div class="sub">Calendar year returns, with selectable annualized return range</div>
+    </div>
+    <div class="controls">
+      <div class="status" id="status">Selected: 2005-2025</div>
+      <button id="resetBtn" type="button">Reset</button>
+    </div>
+  </div>
+  <div class="stage">
+    <svg id="chart" viewBox="0 0 1800 760" role="img" aria-label="Interactive asset class return quilt chart"></svg>
+  </div>
+  <div class="note">Click one year to start a selection, then click another year to set the range. The rightmost column is recalculated using geometric annualized returns for the selected inclusive period.</div>
+</div>
+<script>
+const RETURNS = {"2005":{"Emerging Stocks":34.0,"Commodities":21.4,"Ex-US Real Estate":17.4,"Gold":17.1,"Intl Dev Stocks":13.5,"Emerging Bonds":12.3,"US REITs":12.1,"US Large Cap":6.3,"Global 60/40":4.9,"US Small Cap":4.6,"Cash":3.0,"US High Yield Bonds":2.7,"US Int-Term Bonds":2.4,"Municipal Bonds":1.7,"Intl Dev Bonds":-8.5},"2006":{"Ex-US Real Estate":45.6,"US REITs":35.9,"Emerging Stocks":32.1,"Intl Dev Stocks":26.3,"Gold":23.9,"US Small Cap":18.4,"Global 60/40":15.5,"US Large Cap":15.5,"US High Yield Bonds":11.8,"Emerging Bonds":10.0,"Intl Dev Bonds":8.1,"Cash":4.8,"US Int-Term Bonds":4.3,"Municipal Bonds":3.7,"Commodities":2.1},"2007":{"Emerging Stocks":39.4,"Gold":31.6,"Commodities":16.2,"Intl Dev Bonds":12.1,"Global 60/40":11.2,"Intl Dev Stocks":11.2,"US Int-Term Bonds":7.0,"US Large Cap":5.8,"Emerging Bonds":5.2,"Municipal Bonds":4.8,"Cash":4.8,"Ex-US Real Estate":1.9,"US High Yield Bonds":1.9,"US Small Cap":-1.6,"US REITs":-16.8},"2008":{"Intl Dev Bonds":7.5,"US Int-Term Bonds":5.2,"Municipal Bonds":4.2,"Gold":3.4,"Cash":1.8,"Emerging Bonds":-14.7,"Global 60/40":-25.2,"US High Yield Bonds":-26.2,"US Small Cap":-33.8,"Commodities":-35.6,"US Large Cap":-37.6,"US REITs":-38.0,"Intl Dev Stocks":-43.4,"Ex-US Real Estate":-53.0,"Emerging Stocks":-53.3},"2009":{"Emerging Stocks":78.5,"US High Yield Bonds":58.2,"Ex-US Real Estate":47.5,"Emerging Bonds":34.2,"Intl Dev Stocks":31.8,"US REITs":28.6,"US Large Cap":28.4,"Gold":27.6,"US Small Cap":27.2,"Global 60/40":23.9,"Commodities":18.9,"Municipal Bonds":7.2,"Intl Dev Bonds":6.4,"US Int-Term Bonds":5.9,"Cash":0.1},"2010":{"US REITs":28.5,"Gold":27.7,"US Small Cap":26.9,"Emerging Stocks":18.9,"Ex-US Real Estate":17.2,"Commodities":16.8,"US Large Cap":16.1,"US High Yield Bonds":15.1,"Emerging Bonds":12.8,"Global 60/40":10.5,"Intl Dev Stocks":7.8,"US Int-Term Bonds":6.5,"Municipal Bonds":3.1,"Intl Dev Bonds":1.9,"Cash":0.1},"2011":{"Gold":11.6,"US REITs":8.7,"US Int-Term Bonds":7.8,"Municipal Bonds":7.6,"Emerging Bonds":7.0,"US High Yield Bonds":5.0,"US Large Cap":1.5,"Cash":0.1,"Intl Dev Bonds":-0.1,"Global 60/40":-1.5,"US Small Cap":-4.2,"Intl Dev Stocks":-12.1,"Commodities":-13.3,"Ex-US Real Estate":-16.0,"Emerging Stocks":-18.4},"2012":{"Ex-US Real Estate":40.9,"Emerging Stocks":18.2,"Emerging Bonds":17.9,"US REITs":17.8,"Intl Dev Stocks":17.3,"US Large Cap":16.4,"US Small Cap":16.3,"US High Yield Bonds":15.8,"Global 60/40":11.9,"Intl Dev Bonds":8.0,"Gold":5.7,"US Int-Term Bonds":4.2,"Municipal Bonds":3.6,"Cash":0.1,"Commodities":-1.1},"2013":{"US Small Cap":38.8,"US Large Cap":33.1,"Intl Dev Stocks":22.8,"Global 60/40":12.5,"US High Yield Bonds":7.4,"Ex-US Real Estate":4.4,"US REITs":2.5,"Cash":0.0,"Municipal Bonds":-0.3,"Intl Dev Bonds":-1.3,"US Int-Term Bonds":-2.0,"Emerging Stocks":-2.6,"Emerging Bonds":-4.1,"Commodities":-9.5,"Gold":-27.8},"2014":{"US REITs":30.4,"US Large Cap":13.2,"US Int-Term Bonds":6.0,"US Small Cap":4.9,"Emerging Bonds":4.8,"Municipal Bonds":4.7,"Ex-US Real Estate":3.4,"Global 60/40":3.1,"US High Yield Bonds":2.5,"Cash":0.0,"Gold":-0.2,"Intl Dev Bonds":-2.1,"Emerging Stocks":-2.2,"Intl Dev Stocks":-4.9,"Commodities":-17.0},"2015":{"US REITs":2.5,"Municipal Bonds":2.4,"Emerging Bonds":1.3,"US Large Cap":0.9,"US Int-Term Bonds":0.5,"Cash":0.0,"Intl Dev Stocks":-0.8,"Ex-US Real Estate":-1.8,"Global 60/40":-2.2,"US Small Cap":-4.4,"US High Yield Bonds":-4.5,"Intl Dev Bonds":-6.6,"Gold":-11.4,"Emerging Stocks":-14.9,"Commodities":-24.7},"2016":{"US Small Cap":21.3,"US High Yield Bonds":17.1,"US Large Cap":12.1,"Commodities":11.8,"Emerging Stocks":11.2,"Emerging Bonds":9.9,"Gold":9.1,"US REITs":8.6,"Global 60/40":6.0,"US Int-Term Bonds":2.6,"Ex-US Real Estate":2.0,"Intl Dev Bonds":1.6,"Intl Dev Stocks":1.0,"Cash":0.3,"Municipal Bonds":-0.1},"2017":{"Emerging Stocks":37.3,"Ex-US Real Estate":26.6,"Intl Dev Stocks":25.0,"US Large Cap":21.7,"Global 60/40":17.5,"US Small Cap":14.6,"Gold":11.9,"Intl Dev Bonds":11.3,"Emerging Bonds":8.2,"US High Yield Bonds":7.5,"US REITs":5.1,"US Int-Term Bonds":3.5,"Municipal Bonds":3.5,"Commodities":1.7,"Cash":0.8},"2018":{"Cash":1.8,"Municipal Bonds":1.6,"US Int-Term Bonds":0.0,"Gold":-1.1,"US High Yield Bonds":-2.1,"Intl Dev Bonds":-2.3,"Emerging Bonds":-2.5,"US REITs":-4.6,"US Large Cap":-4.8,"Global 60/40":-5.6,"Ex-US Real Estate":-9.4,"US Small Cap":-11.0,"Commodities":-11.2,"Intl Dev Stocks":-13.8,"Emerging Stocks":-14.6},"2019":{"US Large Cap":31.4,"US REITs":25.8,"US Small Cap":25.5,"Intl Dev Stocks":22.0,"Ex-US Real Estate":21.9,"Global 60/40":18.9,"Gold":18.8,"Emerging Stocks":18.4,"US High Yield Bonds":14.3,"Emerging Bonds":13.1,"US Int-Term Bonds":8.7,"Commodities":7.7,"Municipal Bonds":5.6,"Intl Dev Bonds":4.6,"Cash":2.2},"2020":{"Gold":24.2,"US Large Cap":21.0,"US Small Cap":20.0,"Emerging Stocks":18.3,"Global 60/40":15.0,"Intl Dev Bonds":11.2,"Intl Dev Stocks":7.8,"US Int-Term Bonds":7.5,"US High Yield Bonds":7.1,"Emerging Bonds":6.5,"Municipal Bonds":4.2,"Cash":0.5,"Commodities":-3.1,"Ex-US Real Estate":-6.8,"US REITs":-7.6},"2021":{"US REITs":43.1,"Commodities":27.1,"US Large Cap":26.5,"US Small Cap":14.8,"Intl Dev Stocks":11.3,"Global 60/40":9.1,"Ex-US Real Estate":5.7,"US High Yield Bonds":5.3,"Municipal Bonds":0.5,"Cash":0.0,"US Int-Term Bonds":-1.5,"Emerging Bonds":-1.7,"Emerging Stocks":-2.5,"Gold":-3.8,"Intl Dev Bonds":-9.5},"2022":{"Commodities":16.1,"Cash":1.5,"Gold":-0.4,"Municipal Bonds":-4.8,"US High Yield Bonds":-11.2,"US Int-Term Bonds":-13.0,"Intl Dev Stocks":-14.5,"Emerging Bonds":-15.3,"Global 60/40":-17.2,"US Large Cap":-19.1,"Emerging Stocks":-20.1,"US Small Cap":-20.4,"Intl Dev Bonds":-21.8,"Ex-US Real Estate":-22.2,"US REITs":-24.5},"2023":{"US Large Cap":26.5,"Intl Dev Stocks":18.2,"US Small Cap":16.9,"Global 60/40":15.8,"Gold":13.8,"US REITs":13.7,"US High Yield Bonds":13.4,"Emerging Stocks":9.8,"Emerging Bonds":9.1,"Ex-US Real Estate":6.7,"Intl Dev Bonds":6.0,"US Int-Term Bonds":5.5,"Cash":5.1,"Municipal Bonds":4.6,"Commodities":-7.9},"2024":{"Gold":26.6,"US Large Cap":24.5,"US Small Cap":11.5,"Global 60/40":9.9,"US REITs":8.8,"US High Yield Bonds":8.2,"Emerging Stocks":7.5,"Emerging Bonds":6.6,"Commodities":5.4,"Cash":5.3,"Intl Dev Stocks":3.8,"US Int-Term Bonds":1.3,"Municipal Bonds":0.9,"Ex-US Real Estate":-1.9,"Intl Dev Bonds":-6.9},"2025":{"Gold":65.0,"Emerging Stocks":33.6,"Intl Dev Stocks":31.2,"Ex-US Real Estate":22.0,"US Large Cap":17.4,"Global 60/40":16.9,"Commodities":15.8,"US Small Cap":12.8,"Emerging Bonds":11.1,"US High Yield Bonds":8.6,"Intl Dev Bonds":8.3,"US Int-Term Bonds":7.3,"Municipal Bonds":5.1,"Cash":4.3,"US REITs":2.9}};
+const RANKED = {"2005":[["Emerging Stocks",34.0],["Commodities",21.4],["Ex-US Real Estate",17.4],["Gold",17.1],["Intl Dev Stocks",13.5],["Emerging Bonds",12.3],["US REITs",12.1],["US Large Cap",6.3],["Global 60/40",4.9],["US Small Cap",4.6],["Cash",3.0],["US High Yield Bonds",2.7],["US Int-Term Bonds",2.4],["Municipal Bonds",1.7],["Intl Dev Bonds",-8.5]],"2006":[["Ex-US Real Estate",45.6],["US REITs",35.9],["Emerging Stocks",32.1],["Intl Dev Stocks",26.3],["Gold",23.9],["US Small Cap",18.4],["Global 60/40",15.5],["US Large Cap",15.5],["US High Yield Bonds",11.8],["Emerging Bonds",10.0],["Intl Dev Bonds",8.1],["Cash",4.8],["US Int-Term Bonds",4.3],["Municipal Bonds",3.7],["Commodities",2.1]],"2007":[["Emerging Stocks",39.4],["Gold",31.6],["Commodities",16.2],["Intl Dev Bonds",12.1],["Global 60/40",11.2],["Intl Dev Stocks",11.2],["US Int-Term Bonds",7.0],["US Large Cap",5.8],["Emerging Bonds",5.2],["Municipal Bonds",4.8],["Cash",4.8],["Ex-US Real Estate",1.9],["US High Yield Bonds",1.9],["US Small Cap",-1.6],["US REITs",-16.8]],"2008":[["Intl Dev Bonds",7.5],["US Int-Term Bonds",5.2],["Municipal Bonds",4.2],["Gold",3.4],["Cash",1.8],["Emerging Bonds",-14.7],["Global 60/40",-25.2],["US High Yield Bonds",-26.2],["US Small Cap",-33.8],["Commodities",-35.6],["US Large Cap",-37.6],["US REITs",-38.0],["Intl Dev Stocks",-43.4],["Ex-US Real Estate",-53.0],["Emerging Stocks",-53.3]],"2009":[["Emerging Stocks",78.5],["US High Yield Bonds",58.2],["Ex-US Real Estate",47.5],["Emerging Bonds",34.2],["Intl Dev Stocks",31.8],["US REITs",28.6],["US Large Cap",28.4],["Gold",27.6],["US Small Cap",27.2],["Global 60/40",23.9],["Commodities",18.9],["Municipal Bonds",7.2],["Intl Dev Bonds",6.4],["US Int-Term Bonds",5.9],["Cash",0.1]],"2010":[["US REITs",28.5],["Gold",27.7],["US Small Cap",26.9],["Emerging Stocks",18.9],["Ex-US Real Estate",17.2],["Commodities",16.8],["US Large Cap",16.1],["US High Yield Bonds",15.1],["Emerging Bonds",12.8],["Global 60/40",10.5],["Intl Dev Stocks",7.8],["US Int-Term Bonds",6.5],["Municipal Bonds",3.1],["Intl Dev Bonds",1.9],["Cash",0.1]],"2011":[["Gold",11.6],["US REITs",8.7],["US Int-Term Bonds",7.8],["Municipal Bonds",7.6],["Emerging Bonds",7.0],["US High Yield Bonds",5.0],["US Large Cap",1.5],["Cash",0.1],["Intl Dev Bonds",-0.1],["Global 60/40",-1.5],["US Small Cap",-4.2],["Intl Dev Stocks",-12.1],["Commodities",-13.3],["Ex-US Real Estate",-16.0],["Emerging Stocks",-18.4]],"2012":[["Ex-US Real Estate",40.9],["Emerging Stocks",18.2],["Emerging Bonds",17.9],["US REITs",17.8],["Intl Dev Stocks",17.3],["US Large Cap",16.4],["US Small Cap",16.3],["US High Yield Bonds",15.8],["Global 60/40",11.9],["Intl Dev Bonds",8.0],["Gold",5.7],["US Int-Term Bonds",4.2],["Municipal Bonds",3.6],["Cash",0.1],["Commodities",-1.1]],"2013":[["US Small Cap",38.8],["US Large Cap",33.1],["Intl Dev Stocks",22.8],["Global 60/40",12.5],["US High Yield Bonds",7.4],["Ex-US Real Estate",4.4],["US REITs",2.5],["Cash",0.0],["Municipal Bonds",-0.3],["Intl Dev Bonds",-1.3],["US Int-Term Bonds",-2.0],["Emerging Stocks",-2.6],["Emerging Bonds",-4.1],["Commodities",-9.5],["Gold",-27.8]],"2014":[["US REITs",30.4],["US Large Cap",13.2],["US Int-Term Bonds",6.0],["US Small Cap",4.9],["Emerging Bonds",4.8],["Municipal Bonds",4.7],["Ex-US Real Estate",3.4],["Global 60/40",3.1],["US High Yield Bonds",2.5],["Cash",0.0],["Gold",-0.2],["Intl Dev Bonds",-2.1],["Emerging Stocks",-2.2],["Intl Dev Stocks",-4.9],["Commodities",-17.0]],"2015":[["US REITs",2.5],["Municipal Bonds",2.4],["Emerging Bonds",1.3],["US Large Cap",0.9],["US Int-Term Bonds",0.5],["Cash",0.0],["Intl Dev Stocks",-0.8],["Ex-US Real Estate",-1.8],["Global 60/40",-2.2],["US Small Cap",-4.4],["US High Yield Bonds",-4.5],["Intl Dev Bonds",-6.6],["Gold",-11.4],["Emerging Stocks",-14.9],["Commodities",-24.7]],"2016":[["US Small Cap",21.3],["US High Yield Bonds",17.1],["US Large Cap",12.1],["Commodities",11.8],["Emerging Stocks",11.2],["Emerging Bonds",9.9],["Gold",9.1],["US REITs",8.6],["Global 60/40",6.0],["US Int-Term Bonds",2.6],["Ex-US Real Estate",2.0],["Intl Dev Bonds",1.6],["Intl Dev Stocks",1.0],["Cash",0.3],["Municipal Bonds",-0.1]],"2017":[["Emerging Stocks",37.3],["Ex-US Real Estate",26.6],["Intl Dev Stocks",25.0],["US Large Cap",21.7],["Global 60/40",17.5],["US Small Cap",14.6],["Gold",11.9],["Intl Dev Bonds",11.3],["Emerging Bonds",8.2],["US High Yield Bonds",7.5],["US REITs",5.1],["US Int-Term Bonds",3.5],["Municipal Bonds",3.5],["Commodities",1.7],["Cash",0.8]],"2018":[["Cash",1.8],["Municipal Bonds",1.6],["US Int-Term Bonds",0.0],["Gold",-1.1],["US High Yield Bonds",-2.1],["Intl Dev Bonds",-2.3],["Emerging Bonds",-2.5],["US REITs",-4.6],["US Large Cap",-4.8],["Global 60/40",-5.6],["Ex-US Real Estate",-9.4],["US Small Cap",-11.0],["Commodities",-11.2],["Intl Dev Stocks",-13.8],["Emerging Stocks",-14.6]],"2019":[["US Large Cap",31.4],["US REITs",25.8],["US Small Cap",25.5],["Intl Dev Stocks",22.0],["Ex-US Real Estate",21.9],["Global 60/40",18.9],["Gold",18.8],["Emerging Stocks",18.4],["US High Yield Bonds",14.3],["Emerging Bonds",13.1],["US Int-Term Bonds",8.7],["Commodities",7.7],["Municipal Bonds",5.6],["Intl Dev Bonds",4.6],["Cash",2.2]],"2020":[["Gold",24.2],["US Large Cap",21.0],["US Small Cap",20.0],["Emerging Stocks",18.3],["Global 60/40",15.0],["Intl Dev Bonds",11.2],["Intl Dev Stocks",7.8],["US Int-Term Bonds",7.5],["US High Yield Bonds",7.1],["Emerging Bonds",6.5],["Municipal Bonds",4.2],["Cash",0.5],["Commodities",-3.1],["Ex-US Real Estate",-6.8],["US REITs",-7.6]],"2021":[["US REITs",43.1],["Commodities",27.1],["US Large Cap",26.5],["US Small Cap",14.8],["Intl Dev Stocks",11.3],["Global 60/40",9.1],["Ex-US Real Estate",5.7],["US High Yield Bonds",5.3],["Municipal Bonds",0.5],["Cash",0.0],["US Int-Term Bonds",-1.5],["Emerging Bonds",-1.7],["Emerging Stocks",-2.5],["Gold",-3.8],["Intl Dev Bonds",-9.5]],"2022":[["Commodities",16.1],["Cash",1.5],["Gold",-0.4],["Municipal Bonds",-4.8],["US High Yield Bonds",-11.2],["US Int-Term Bonds",-13.0],["Intl Dev Stocks",-14.5],["Emerging Bonds",-15.3],["Global 60/40",-17.2],["US Large Cap",-19.1],["Emerging Stocks",-20.1],["US Small Cap",-20.4],["Intl Dev Bonds",-21.8],["Ex-US Real Estate",-22.2],["US REITs",-24.5]],"2023":[["US Large Cap",26.5],["Intl Dev Stocks",18.2],["US Small Cap",16.9],["Global 60/40",15.8],["Gold",13.8],["US REITs",13.7],["US High Yield Bonds",13.4],["Emerging Stocks",9.8],["Emerging Bonds",9.1],["Ex-US Real Estate",6.7],["Intl Dev Bonds",6.0],["US Int-Term Bonds",5.5],["Cash",5.1],["Municipal Bonds",4.6],["Commodities",-7.9]],"2024":[["Gold",26.6],["US Large Cap",24.5],["US Small Cap",11.5],["Global 60/40",9.9],["US REITs",8.8],["US High Yield Bonds",8.2],["Emerging Stocks",7.5],["Emerging Bonds",6.6],["Commodities",5.4],["Cash",5.3],["Intl Dev Stocks",3.8],["US Int-Term Bonds",1.3],["Municipal Bonds",0.9],["Ex-US Real Estate",-1.9],["Intl Dev Bonds",-6.9]],"2025":[["Gold",65.0],["Emerging Stocks",33.6],["Intl Dev Stocks",31.2],["Ex-US Real Estate",22.0],["US Large Cap",17.4],["Global 60/40",16.9],["Commodities",15.8],["US Small Cap",12.8],["Emerging Bonds",11.1],["US High Yield Bonds",8.6],["Intl Dev Bonds",8.3],["US Int-Term Bonds",7.3],["Municipal Bonds",5.1],["Cash",4.3],["US REITs",2.9]]};
+const ASSETS = ["Global 60/40","US Large Cap","US Small Cap","Intl Dev Stocks","Emerging Stocks","Municipal Bonds","US Int-Term Bonds","US High Yield Bonds","Intl Dev Bonds","Emerging Bonds","US REITs","Ex-US Real Estate","Commodities","Gold","Cash"];
+const COLORS = {"Global 60/40":"#2d2d2d","US Large Cap":"#0b7a35","US Small Cap":"#35a854","Intl Dev Stocks":"#78c679","Emerging Stocks":"#b7db4a","Municipal Bonds":"#ffe36e","US Int-Term Bonds":"#f0b429","US High Yield Bonds":"#b66a00","Intl Dev Bonds":"#fff4b8","Emerging Bonds":"#e87722","US REITs":"#0f5a9d","Ex-US Real Estate":"#7dbbd8","Commodities":"#c7a2d8","Gold":"#7b3294","Cash":"#c7322b"};
+const LEGEND = [["Portfolio","Global 60/40","Global 60/40"],["Equity","US Large Cap","US Large Cap"],["Equity","US Small Cap","US Small Cap"],["Equity","Intl Dev Stocks","Intl Dev Stocks"],["Equity","Emerging Stocks","Emerging Stocks"],["Bond","Municipal Bonds","Municipal Bonds"],["Bond","US Int-Term Bonds","US Int-Term Bonds"],["Bond","US High Yield Bonds","US High Yield Bonds"],["Bond","Intl Dev Bonds","Intl Dev Bonds"],["Bond","Emerging Bonds","Emerging Bonds"],["Real Estate","US REITs","US REITs"],["Real Estate","Ex-US Real Estate","Ex-US Real Estate"],["Commodity","Commodities","Commodities"],["Gold","Gold","Gold"],["Cash","Cash","Cash"]];
+const YEARS = Array.from({length: 21}, (_, i) => String(2005 + i));
+const svg = document.getElementById('chart');
+const statusEl = document.getElementById('status');
+const resetBtn = document.getElementById('resetBtn');
+const ns = 'http://www.w3.org/2000/svg';
+const cfg = { x0: 28, yBase: 342, yearLane: 29, negGap: 20, cellW: 50, cellH: 18, colGap: 7, computedGap: 16, topPad: 18, bottomPad: 690, legendX: 1502 };
+let selected = ['2005', '2025'];
+function el(name, attrs = {}, parent = svg) {
+  const node = document.createElementNS(ns, name);
+  for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+  parent.appendChild(node);
+  return node;
+}
+function textNode(attrs, text, parent = svg) {
+  const node = el('text', attrs, parent);
+  node.textContent = text;
+  return node;
+}
+function textColor(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return (0.299*r + 0.587*g + 0.114*b) / 255 < 0.55 ? '#fff' : '#27313a';
+}
+function formatPct(v) { return `${v.toFixed(1)}%`; }
+function sortedPairData(year) { return RANKED[year].slice().sort((a,b) => b[1] - a[1]); }
+function annualized(start, end) {
+  const s = Math.min(Number(start), Number(end));
+  const e = Math.max(Number(start), Number(end));
+  const span = e - s + 1;
+  return ASSETS.map(asset => {
+    let product = 1;
+    for (let y = s; y <= e; y++) product *= (1 + RETURNS[String(y)][asset] / 100);
+    return [asset, (Math.pow(product, 1 / span) - 1) * 100];
+  }).sort((a,b) => b[1] - a[1]);
+}
+function drawCell(x, y, asset, value, parent = svg) {
+  const fill = COLORS[asset];
+  el('rect', { x, y, width: cfg.cellW, height: cfg.cellH - 1, fill }, parent);
+  textNode({ class: 'cell-text', x: x + cfg.cellW/2, y: y + 16, 'text-anchor': 'middle', fill: textColor(fill) }, formatPct(value), parent);
+}
+function drawColumn(year, index, data) {
+  const x = cfg.x0 + index * (cfg.cellW + cfg.colGap);
+  const group = el('g', { class: 'year-column', 'data-year': year, tabindex: 0, role: 'button', 'aria-label': `Select ${year}` });
+  const positives = data.filter(d => d[1] >= 0);
+  const negatives = data.filter(d => d[1] < 0);
+  el('rect', { class: 'range-bg', x: x - 3, y: cfg.topPad, width: cfg.cellW + 6, height: cfg.bottomPad - cfg.topPad }, group);
+  let y = cfg.yBase - positives.length * cfg.cellH;
+  for (const [asset, value] of positives) { drawCell(x, y, asset, value, group); y += cfg.cellH; }
+  textNode({ class: 'year-label', x: x + cfg.cellW/2, y: cfg.yBase + cfg.yearLane, 'text-anchor': 'middle', fill: '#000' }, year, group);
+  y = cfg.yBase + cfg.yearLane + cfg.negGap;
+  for (const [asset, value] of negatives) { drawCell(x, y, asset, value, group); y += cfg.cellH; }
+  el('rect', { class: 'column-outline', x: x - 4, y: cfg.topPad, width: cfg.cellW + 8, height: cfg.bottomPad - cfg.topPad, rx: 4 }, group);
+  el('rect', { class: 'column-hit', x: x - 5, y: cfg.topPad, width: cfg.cellW + 10, height: cfg.bottomPad - cfg.topPad + 22 }, group);
+  group.addEventListener('click', () => selectYear(year));
+  group.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); selectYear(year); } });
+}
+function drawComputedColumn(data) {
+  const x = cfg.x0 + YEARS.length * (cfg.cellW + cfg.colGap) + cfg.computedGap;
+  const group = el('g', { id: 'computed-column' });
+  el('rect', { class: 'computed-bg', x: x - 7, y: cfg.topPad, width: cfg.cellW + 14, height: cfg.bottomPad - cfg.topPad + 22, rx: 6 }, group);
+  const positives = data.filter(d => d[1] >= 0);
+  const negatives = data.filter(d => d[1] < 0);
+  let y = cfg.yBase - positives.length * cfg.cellH;
+  for (const [asset, value] of positives) { drawCell(x, y, asset, value, group); y += cfg.cellH; }
+  const s = Math.min(Number(selected[0]), Number(selected[1]));
+  const e = Math.max(Number(selected[0]), Number(selected[1]));
+  textNode({ class: 'year-label', x: x + cfg.cellW/2, y: cfg.yBase + cfg.yearLane, 'text-anchor': 'middle', fill: '#000' }, `${s}-${e}`, group);
+  textNode({ class: 'computed-title', x: x + cfg.cellW/2, y: cfg.yBase + cfg.yearLane + 18, 'text-anchor': 'middle' }, 'Annualized', group);
+  y = cfg.yBase + cfg.yearLane + cfg.negGap + 18;
+  for (const [asset, value] of negatives) { drawCell(x, y, asset, value, group); y += cfg.cellH; }
+}
+function drawLegend() {
+  const dividerX = cfg.legendX - 42;
+  el('line', { x1: dividerX, y1: 18, x2: dividerX, y2: 705, stroke: '#000', 'stroke-width': 5 });
+  let y = 118;
+  for (const [prefix, name, asset] of LEGEND) {
+    el('rect', { x: cfg.legendX, y: y - 14, width: 15, height: 15, fill: COLORS[asset] });
+    const t = textNode({ class: 'legend', x: cfg.legendX + 34, y, fill: '#000' }, '');
+    const a = document.createElementNS(ns, 'tspan'); a.setAttribute('class', 'prefix'); a.textContent = `${prefix}:`; t.appendChild(a);
+    const b = document.createElementNS(ns, 'tspan'); b.textContent = ` ${name}`; t.appendChild(b);
+    y += 24;
+  }
+}
+function updateHighlights() {
+  const s = Math.min(Number(selected[0]), Number(selected[1]));
+  const e = Math.max(Number(selected[0]), Number(selected[1]));
+  svg.querySelectorAll('.year-column').forEach(g => {
+    const year = Number(g.dataset.year);
+    g.classList.toggle('selected', year === Number(selected[0]) || year === Number(selected[1]));
+    g.classList.toggle('in-range', year >= s && year <= e);
+  });
+  statusEl.textContent = `Selected: ${s}-${e} (${e - s + 1} yrs)`;
+}
+function selectYear(year) {
+  if (selected.length >= 2) selected = [year];
+  else if (selected.length === 1) selected = [selected[0], year].sort((a,b) => Number(a) - Number(b));
+  else selected = [year];
+  if (selected.length === 1) {
+    statusEl.textContent = `Start selected: ${year}. Pick an end year.`;
+    svg.querySelectorAll('.year-column').forEach(g => {
+      g.classList.toggle('selected', g.dataset.year === year);
+      g.classList.remove('in-range');
+    });
+    return;
+  }
+  render();
+}
+function render() {
+  svg.innerHTML = '';
+  el('rect', { x: 0, y: 0, width: 1800, height: 760, fill: '#fff' });
+  YEARS.forEach((year, index) => drawColumn(year, index, sortedPairData(year)));
+  drawComputedColumn(annualized(selected[0], selected[1]));
+  drawLegend();
+  textNode({ class: 'source', x: 28, y: 728 }, 'Source: Bloomberg and Morningstar. Calendar-year returns are gross of fees. Computed column uses inclusive geometric annualization from selected start/end years.');
+  textNode({ class: 'source', x: 1770, y: 728, 'text-anchor': 'end' }, '© 2026 Magnus Financial Group LLC. All Rights Reserved');
+  updateHighlights();
+}
+resetBtn.addEventListener('click', () => { selected = ['2005','2025']; render(); });
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-labelledby="title">
+  <title id="title">Endowus</title>
+  <rect width="240" height="72" fill="#ffffff"/>
+  <text x="116" y="48" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="800">
+    <tspan fill="#1b2b42">Endow</tspan><tspan fill="#1286ff">us</tspan>
+  </text>
+</svg>

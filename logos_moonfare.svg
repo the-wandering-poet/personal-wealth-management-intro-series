@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-labelledby="title">
+  <title id="title">Moonfare</title>
+  <rect width="240" height="72" rx="0" fill="#202596"/>
+  <text x="120" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="32" fill="#ffffff">Moonfare</text>
+  <circle cx="198" cy="24" r="3" fill="none" stroke="#ffffff" stroke-width="1"/>
+  <text x="198" y="26" text-anchor="middle" font-family="Arial, sans-serif" font-size="4" fill="#ffffff">R</text>
+</svg>
