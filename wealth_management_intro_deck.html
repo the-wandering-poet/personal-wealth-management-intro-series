@@ -13,9 +13,11 @@
       --line: #e7ddd2;
       --accent: #0d5f4c;
       --gold: #b8860b;
+      --gold-deep: #8a6508;
       --blue: #08519c;
       --orange: #e07a2f;
       --purple: #7b3294;
+      --warn: #b14a2c;
     }
 
     * {
@@ -54,6 +56,123 @@
       padding-bottom: 10px;
     }
 
+    .cover-slide,
+    .section-divider-slide {
+      grid-template-rows: 1fr auto;
+    }
+
+    .cover-content,
+    .section-divider-content,
+    .agenda-content {
+      min-height: 0;
+      padding: 74px 70px 48px;
+      display: grid;
+      align-content: center;
+    }
+
+    .cover-content {
+      gap: 30px;
+    }
+
+    .cover-kicker,
+    .section-kicker {
+      margin: 0;
+      color: var(--accent);
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 820;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cover-title {
+      margin: 0;
+      max-width: 1040px;
+      color: var(--ink);
+      font-size: 76px;
+      line-height: 1.02;
+      font-weight: 840;
+    }
+
+    .cover-meta {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 650;
+    }
+
+    .cover-meta p {
+      margin: 0;
+    }
+
+    .agenda-content {
+      gap: 34px;
+    }
+
+    .agenda-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: 52px;
+      line-height: 1.08;
+      font-weight: 820;
+    }
+
+    .agenda-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 18px;
+      max-width: 940px;
+    }
+
+    .agenda-list li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 22px 26px;
+      color: var(--ink);
+      font-size: 32px;
+      line-height: 1.15;
+      font-weight: 760;
+    }
+
+    .section-divider-content {
+      gap: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      max-width: 980px;
+      color: var(--ink);
+      font-size: 64px;
+      line-height: 1.04;
+      font-weight: 840;
+    }
+
+    .section-subtitle {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 25px;
+      line-height: 1.28;
+      font-weight: 650;
+    }
+
+    .slide.headline-hidden h1 {
+      display: none;
+    }
+
+    .slide.headline-hidden .kicker {
+      margin-bottom: 0;
+    }
+
+    .slide.headline-hidden .header {
+      align-items: center;
+    }
+
     .header {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -86,6 +205,14 @@
       max-width: 1040px;
       font-size: 29px;
       line-height: 1.12;
+    }
+
+    .subtitle {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.3;
+      font-weight: 600;
     }
 
     .page-tag {
@@ -136,20 +263,73 @@
       object-fit: contain;
     }
 
+    .wealth-definition {
+      min-height: 0;
+      padding: 44px 88px 36px;
+      display: grid;
+      align-content: stretch;
+      gap: 30px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .wealth-step { display: none; }
+    .wealth-step.is-active { display: grid; }
+    .wealth-question { align-content: center; min-height: 360px; }
+    .wealth-equation { gap: 18px; }
+    .wealth-definition-fixed { min-height: 168px; align-content: start; }
+    .wealth-expand { align-content: start; gap: 28px; }
+    .wealth-line { margin: 0; font-size: 64px; line-height: 1.08; font-weight: 820; color: var(--ink); }
+    .wealth-question .wealth-line { font-size: 78px; text-align: center; }
+    .wealth-line .question-mark { color: var(--gold); }
+    .wealth-line .not-money { color: #8f302c; }
+    .wealth-line .store-value { color: var(--accent); }
+    .wealth-expanded-categories { display: grid; gap: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .wealth-expanded-row { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 18px; align-items: center; }
+    .wealth-expanded-line { margin: 0; font-size: 29px; line-height: 1.2; font-weight: 720; color: var(--muted); white-space: nowrap; }
+    .wealth-expanded-line strong { color: var(--ink); font-weight: 840; }
+    .wealth-expanded-line span { color: var(--accent); font-weight: 760; }
+    .wealth-expanded-examples { margin: 0; color: var(--muted); font-size: 18px; font-weight: 650; text-align: left; }
+    .wealth-click-hint { align-self: end; color: var(--muted); font-size: 13px; font-weight: 650; text-align: right; opacity: 0.78; }
+
+    .premise-content {
+      min-height: 0;
+      padding: 22px 62px 20px;
+      display: grid;
+      gap: 14px;
+      align-content: center;
+    }
+
+    .premise-group { display: grid; grid-template-columns: 430px minmax(0, 1fr); gap: 24px; align-items: stretch; }
+    .premise-group-header { display: grid; gap: 10px; align-content: center; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 22px 24px; color: var(--muted); font-size: 21px; line-height: 1.2; font-weight: 700; }
+    .premise-group-title { color: var(--ink); font-size: 34px; line-height: 1.05; font-weight: 840; }
+    .premise-box-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .premise-asset-line { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 12px; align-items: center; }
+    .premise-box { min-width: 0; border-radius: 8px; min-height: 60px; padding: 10px 16px; color: #fff; display: grid; align-content: center; }
+    .premise-box-name { display: block; font-size: 21px; line-height: 1.08; font-weight: 820; }
+    .premise-box-type { display: block; margin-top: 5px; font-size: 12px; line-height: 1.2; font-weight: 780; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.86; }
+    .premise-point { margin: 0; padding: 12px 14px 12px 28px; min-height: 60px; display: grid; align-content: center; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--muted); font-size: 17px; line-height: 1.18; font-weight: 670; }
+    .premise-point li::marker { color: var(--accent); }
+    .premise-equity .premise-box { background: #006d2c; }
+    .premise-real-estate .premise-box { background: #08519c; }
+    .premise-gold .premise-box { background: #7b3294; }
+    .premise-bitcoin .premise-box { background: #f7931a; color: #3a2105; }
+    .premise-bonds .premise-box { background: #f1c232; color: #3a2b03; }
+    .premise-commodities .premise-box { background: #c7a2d8; color: #2e1638; }
+
     .return-vol-chart {
-      padding-top: 6px;
-      padding-bottom: 4px;
+      padding: 2px 10px 4px;
     }
 
     .return-vol-chart .chart-wrap {
       align-items: center;
       justify-items: center;
-      padding: 2px 6px;
+      padding: 0;
     }
 
     .return-vol-chart .chart-wrap img {
       height: auto;
-      max-height: 520px;
+      max-height: 625px;
     }
 
     .interactive-content {
@@ -165,6 +345,547 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fff;
+    }
+
+    .fees-content {
+      padding: 16px 54px 12px;
+      min-height: 0;
+      display: grid;
+      gap: 16px;
+    }
+
+    .fees-two-col {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .fees-left-narrow {
+      grid-template-columns: 350px minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .fees-card {
+      min-width: 0;
+      min-height: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+
+    .fees-card h2,
+    .fees-card h3,
+    .fees-card p {
+      margin: 0;
+    }
+
+    .lever-list {
+      display: grid;
+      grid-template-rows: auto repeat(5, 1fr);
+      gap: 9px;
+    }
+
+    .lever-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 760;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .lever-item {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 12px;
+      border-left: 5px solid var(--accent);
+    }
+
+    .lever-item:nth-child(3) { border-left-color: var(--blue); }
+    .lever-item:nth-child(4) { border-left-color: var(--purple); }
+    .lever-item:nth-child(5) { border-left-color: var(--orange); }
+    .lever-item:nth-child(6) { border-left-color: var(--gold); }
+
+    .lever-badge {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 820;
+    }
+
+    .lever-item:nth-child(3) .lever-badge { background: var(--blue); }
+    .lever-item:nth-child(4) .lever-badge { background: var(--purple); }
+    .lever-item:nth-child(5) .lever-badge { background: var(--orange); }
+    .lever-item:nth-child(6) .lever-badge { background: var(--gold); }
+
+    .lever-item h2 {
+      margin: 0 0 2px;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .lever-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .rule-card {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 12px;
+    }
+
+    .rule-banner {
+      background: linear-gradient(180deg, #f4ebda 0%, #fbf7f2 100%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+
+    .rule-label {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 780;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .rule-headline {
+      margin-top: 4px;
+      font-size: 28px;
+      line-height: 1.08;
+      font-weight: 820;
+    }
+
+    .rule-headline strong { color: var(--gold); }
+
+    .rule-sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .fees-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .fees-table th {
+      padding: 8px 8px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .fees-table td {
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+
+    .fees-table .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .loss-bar {
+      display: inline-block;
+      width: 54px;
+      height: 7px;
+      margin-right: 7px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #efe5d8;
+      vertical-align: 1px;
+    }
+
+    .loss-bar span {
+      display: block;
+      height: 100%;
+      background: var(--warn);
+      border-radius: inherit;
+    }
+
+    .figure-content {
+      padding: 10px 48px 8px;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      gap: 6px;
+    }
+
+    .figure-card {
+      margin: 0;
+      min-height: 0;
+      display: grid;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px;
+    }
+
+    .figure-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: contain;
+    }
+
+    .evidence-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 9.5px;
+      line-height: 1.24;
+    }
+
+    .callout-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .diff-card {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .diff-value {
+      margin: 0;
+      color: var(--accent);
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 830;
+    }
+
+    .diff-label {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .hook-numbers-native {
+      display: grid;
+      grid-template-columns: 1fr 8px 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hook-divider-native {
+      border-radius: 99px;
+      background: var(--line);
+    }
+
+    .tax-hero-card {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 8px;
+      text-align: center;
+      padding: 26px;
+    }
+
+    .tax-hero-card.green {
+      background: #f4fbf5;
+      border-color: #b7dfc4;
+    }
+
+    .tax-hero-card.gold {
+      background: #fcf7e8;
+      border-color: #ead7a7;
+    }
+
+    .tax-hero-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .tax-hero-num {
+      font-size: 130px;
+      line-height: 0.95;
+      font-weight: 840;
+      letter-spacing: -0.04em;
+    }
+
+    .tax-hero-card.green .tax-hero-num { color: var(--accent); }
+    .tax-hero-card.gold .tax-hero-num { color: var(--gold-deep); }
+
+    .tax-caption {
+      max-width: 440px;
+      font-size: 18px;
+      line-height: 1.28;
+      font-weight: 670;
+    }
+
+    .tax-caption small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .with-big {
+      color: var(--accent);
+      font-size: 88px;
+      line-height: 0.95;
+      font-weight: 840;
+      letter-spacing: -0.04em;
+    }
+
+    .with-label {
+      margin-top: 8px;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 760;
+    }
+
+    .with-label small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .with-points-native {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.32;
+    }
+
+    .with-points-native li + li { margin-top: 9px; }
+
+    .with-callout-native {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .with-callout-cell {
+      padding: 12px;
+      border-radius: 8px;
+      background: #f4fbf5;
+      border: 1px solid #b7dfc4;
+      text-align: center;
+    }
+
+    .with-callout-big {
+      color: var(--accent);
+      font-size: 35px;
+      line-height: 1;
+      font-weight: 820;
+    }
+
+    .with-callout-label {
+      margin-top: 5px;
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .with-callout-label small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .estate-content {
+      grid-template-rows: 1fr 1.05fr;
+    }
+
+    .estate-hero {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .estate-side {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .estate-tag {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .estate-num {
+      margin-top: 6px;
+      font-size: 82px;
+      line-height: 0.96;
+      font-weight: 840;
+      letter-spacing: -0.05em;
+    }
+
+    .estate-num.nra { color: var(--warn); }
+    .estate-num.cit { color: var(--accent); }
+
+    .estate-sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 650;
+    }
+
+    .estate-ratio {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .estate-ratio strong {
+      display: block;
+      color: var(--gold-deep);
+      font-size: 42px;
+      line-height: 1.05;
+    }
+
+    .estate-bottom {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .stat-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stat-card {
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      min-height: 0;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-value {
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 830;
+    }
+
+    .stat-card.warn .stat-value { color: var(--warn); }
+
+    .stat-value small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .text-card-title {
+      color: var(--accent);
+      font-size: 15px;
+      line-height: 1.15;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .text-card-copy {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .countries {
+      display: block;
+      margin-top: 5px;
+      color: var(--ink);
+      font-weight: 650;
+    }
+
+    .chain {
+      display: inline-block;
+      margin-top: 6px;
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .caveat {
+      display: block;
+      margin-top: 5px;
+      font-size: 11px;
+      color: var(--warn);
+    }
+
+    .venn-content-native {
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .venn-disclaimer-native {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .venn-disclaimer-native strong:first-child {
+      color: var(--warn);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .venn-card svg {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
     }
 
     .strategy-content {
@@ -264,11 +985,39 @@
       box-shadow: inset 4px 0 0 var(--purple);
     }
 
+    .asset-tab.gold-active {
+      color: #3b2445;
+      border-color: #d8bfdc;
+      background: #f1e7f4;
+      box-shadow: inset 4px 0 0 var(--purple);
+    }
+
+    .asset-tab.bond-active {
+      color: #4b3604;
+      border-color: #ead7a7;
+      background: #fff8df;
+      box-shadow: inset 4px 0 0 #f1c232;
+    }
+
+    .asset-tab.commodity-active {
+      color: #3b2445;
+      border-color: #d8bfdc;
+      background: #f5ecf8;
+      box-shadow: inset 4px 0 0 #c7a2d8;
+    }
+
     .asset-tab.equity-active {
       color: #0d4f2b;
       border-color: #b7dfc4;
       background: #eef8f0;
       box-shadow: inset 4px 0 0 #0b7a35;
+    }
+
+    .asset-tab.bitcoin-active {
+      color: #3a2105;
+      border-color: #f5c983;
+      background: #fff3df;
+      box-shadow: inset 4px 0 0 #f7931a;
     }
 
     .sub-menu {
@@ -350,6 +1099,324 @@
       display: block;
     }
 
+    .asset-main.single-asset {
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      grid-template-rows: minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .asset-main.single-asset .asset-chart {
+      grid-row: 1;
+    }
+
+    .asset-main.single-asset .gold-vehicle-box,
+    .asset-main.single-asset .bond-practice-box,
+    .asset-main.single-asset .commodity-practice-box {
+      grid-column: auto;
+      grid-row: 1;
+    }
+
+    .asset-main.single-asset .gold-vehicle-box {
+      grid-template-columns: 1fr;
+      align-content: start;
+    }
+
+    .asset-main.gold-vertical {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    .asset-main.gold-vertical .gold-vehicle-box {
+      grid-column: 1;
+      grid-row: 2;
+      grid-template-columns: 1.05fr 1fr;
+      align-content: start;
+    }
+
+    .asset-main.commodity-chart-only {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    .bitcoin-main {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(300px, 1fr);
+      grid-template-rows: minmax(0, 1.1fr) minmax(210px, 0.9fr);
+      gap: 14px;
+    }
+
+    .bitcoin-chart-card,
+    .bitcoin-etf-card,
+    .bitcoin-decision-card,
+    .public-equity-card,
+    .spiva-chart-card,
+    .spiva-takeaway-panel,
+    .spiva-basis {
+      min-width: 0;
+      min-height: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .bitcoin-chart-card {
+      grid-column: 1;
+      grid-row: 1;
+      margin: 0;
+      padding: 14px 18px 12px;
+      display: grid;
+      align-items: center;
+    }
+    .bitcoin-chart-card img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .bitcoin-decision-card {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      padding: 22px 24px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      overflow: hidden;
+    }
+    .bitcoin-decision-card h2 { margin: 0; font-size: 24px; line-height: 1.18; }
+    .bitcoin-decision-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; align-content: center; }
+    .bitcoin-decision-list li { display: grid; grid-template-columns: 16px 1fr; gap: 14px; align-items: center; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 18px; line-height: 1.22; font-weight: 760; }
+    .bitcoin-decision-list span { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+    .bitcoin-decision-list li:nth-child(2) span { background: var(--muted); }
+    .bitcoin-decision-list li:nth-child(3) span { background: #b8281f; }
+    .bitcoin-bottom-line { border-left: 5px solid var(--accent); padding: 4px 0 4px 16px; }
+    .bitcoin-bottom-line .lbl { margin: 0 0 6px; font-size: 12px; font-weight: 760; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .bitcoin-bottom-line p { margin: 0; font-size: 19px; line-height: 1.28; font-weight: 740; color: var(--ink); }
+    .bitcoin-etf-card {
+      grid-column: 1;
+      grid-row: 2;
+      padding: 10px 14px 8px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 4px;
+      overflow: hidden;
+    }
+    .bitcoin-etf-card h2 { margin: 0; font-size: 16px; line-height: 1.15; }
+    .bitcoin-etf-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 11px; line-height: 1.12; }
+    .bitcoin-etf-table th, .bitcoin-etf-table td { text-align: left; padding: 4px 6px; border-bottom: 1px solid #eee5db; vertical-align: middle; }
+    .bitcoin-etf-table th { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .bitcoin-etf-table tr:last-child td { border-bottom: 0; }
+    .bitcoin-etf-table .ticker { font-weight: 820; font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; }
+    .mini-footnote { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.2; }
+
+    .public-equity-main { min-width: 0; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+    .public-equity-card { display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 12px; padding: 20px 22px; border-top: 9px solid var(--purple); }
+    .public-equity-card.passive { border-top-color: #1f4e79; }
+    .public-equity-card.active { border-top-color: #a8412e; }
+    .public-equity-label { margin: 0; color: var(--purple); font-size: 13px; line-height: 1.2; font-weight: 820; text-transform: uppercase; letter-spacing: 0.08em; }
+    .public-equity-card.passive .public-equity-label { color: #1f4e79; }
+    .public-equity-card.active .public-equity-label { color: #a8412e; }
+    .public-equity-card h2 { margin: 0; color: var(--ink); font-size: 34px; line-height: 1.06; }
+    .public-equity-card p { margin: 0; color: var(--ink); font-size: 17px; line-height: 1.32; }
+    .tradeoff-rule { height: 1px; background: var(--line); }
+    .tradeoff-label { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.2; font-weight: 820; text-transform: uppercase; letter-spacing: 0.08em; }
+    .tradeoff-copy { color: var(--muted) !important; font-size: 15px !important; line-height: 1.3 !important; }
+
+    .spiva-main { min-width: 0; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 270px; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; }
+    .spiva-chart-card { margin: 0; padding: 6px; display: grid; align-items: center; }
+    .spiva-chart-card img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+    .spiva-takeaway-panel { border-left: 5px solid var(--accent); padding: 16px 17px; display: grid; gap: 14px; align-content: start; }
+    .spiva-takeaway-panel h2 { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.2; font-weight: 820; text-transform: uppercase; letter-spacing: 0.08em; }
+    .spiva-takeaway { display: grid; grid-template-columns: 12px 1fr; gap: 10px; align-items: start; }
+    .spiva-dot { width: 10px; height: 10px; margin-top: 5px; border-radius: 999px; background: #a8412e; }
+    .spiva-takeaway:nth-of-type(2) .spiva-dot { background: #1f4e79; }
+    .spiva-takeaway:nth-of-type(3) .spiva-dot { background: #d4a017; }
+    .spiva-takeaway strong { display: block; color: var(--ink); font-size: 17px; line-height: 1.15; }
+    .spiva-takeaway span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; line-height: 1.3; }
+    .spiva-implication { border: 1px solid #b7dfc4; border-radius: 8px; background: #f4fbf5; padding: 10px 12px; color: var(--ink); font-size: 13px; line-height: 1.3; font-weight: 650; }
+    .spiva-implication strong { color: var(--accent); font-weight: 820; }
+    .spiva-basis { grid-column: 1 / -1; padding: 9px 12px; color: var(--muted); font-size: 11px; line-height: 1.28; }
+    .spiva-basis strong { color: var(--ink); font-weight: 820; }
+
+    .equity-vehicle-main {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(290px, 0.95fr);
+      gap: 14px;
+    }
+
+    .equity-account-grid {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .equity-account-card,
+    .equity-implication-card {
+      min-width: 0;
+      min-height: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .equity-account-card {
+      border-top: 7px solid var(--accent);
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .equity-account-card:nth-child(2) { border-top-color: #1f4e79; }
+    .equity-account-card:nth-child(3) { border-top-color: #a8412e; }
+    .equity-account-card:nth-child(4) { border-top-color: #d4a017; }
+
+    .equity-account-card h2,
+    .equity-implication-card h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.12;
+    }
+
+    .equity-account-card p,
+    .equity-implication-card p,
+    .equity-implication-card li {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.32;
+    }
+
+    .equity-account-card strong,
+    .equity-implication-card strong {
+      color: var(--ink);
+      font-weight: 820;
+    }
+
+    .equity-implication-card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 13px;
+      border-left: 5px solid var(--accent);
+    }
+
+    .equity-implication-card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 9px;
+      align-content: start;
+    }
+
+    .equity-tax-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .equity-tax-strip div {
+      border-radius: 8px;
+      background: #f4fbf5;
+      border: 1px solid #b7dfc4;
+      padding: 10px 8px;
+      color: #0d4f2b;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 780;
+    }
+
+    .ending-content {
+      padding: 18px 54px 12px;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.68fr 1.55fr 0.95fr;
+      gap: 14px;
+    }
+
+    .ending-row {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .ending-section-box,
+    .ending-takeaway-box {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      align-content: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 18px 22px;
+    }
+
+    .ending-section-box {
+      justify-items: center;
+      text-align: center;
+      color: var(--ink);
+      font-size: 35px;
+      line-height: 1;
+      font-weight: 840;
+    }
+
+    .ending-takeaway-box {
+      gap: 8px;
+    }
+
+    .ending-takeaway-box h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.12;
+    }
+
+    .ending-takeaway-box p,
+    .ending-takeaway-box li {
+      margin: 0;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.23;
+    }
+
+    .ending-takeaway-box ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .ending-takeaway-box strong {
+      color: var(--ink);
+      font-weight: 820;
+    }
+
+    .ending-row.one .ending-section-box,
+    .ending-row.one .ending-takeaway-box {
+      border-left: 7px solid var(--accent);
+    }
+
+    .ending-row.two .ending-section-box,
+    .ending-row.two .ending-takeaway-box {
+      border-left: 7px solid var(--purple);
+    }
+
+    .ending-row.three .ending-section-box,
+    .ending-row.three .ending-takeaway-box {
+      border-left: 7px solid var(--gold);
+    }
+
+    .ending-takeaway-box em {
+      color: var(--warn);
+      font-style: italic;
+      font-weight: 720;
+    }
+
     .gold-vehicle-box {
       grid-column: 1 / -1;
       display: grid;
@@ -387,6 +1454,70 @@
 
     .gold-vehicle-box ul {
       padding-left: 18px;
+    }
+
+    .bond-practice-box,
+    .commodity-practice-box {
+      display: grid;
+      align-content: start;
+      gap: 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 18px;
+      min-height: 0;
+    }
+
+    .bond-practice-box {
+      border-color: #ead7a7;
+      background: #fff8df;
+    }
+
+    .commodity-practice-box {
+      border-color: #d8bfdc;
+      background: #f8f1fb;
+    }
+
+    .bond-practice-box h2,
+    .commodity-practice-box h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.12;
+    }
+
+    .bond-practice-box p,
+    .commodity-practice-box p,
+    .bond-practice-box li,
+    .commodity-practice-box li {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .bond-practice-box ul,
+    .commodity-practice-box ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .bond-ladder {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .bond-ladder div {
+      border-radius: 8px;
+      background: #f1c232;
+      color: #3a2b03;
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.15;
+      font-weight: 760;
     }
 
     .placeholder-main {
@@ -784,6 +1915,15 @@
       line-height: 1.35;
     }
 
+    .footer > div {
+      min-width: 0;
+    }
+
+    .footer > div:last-child {
+      max-width: 760px;
+      text-align: right;
+    }
+
     .brand {
       font-weight: 760;
       color: var(--ink);
@@ -864,18 +2004,56 @@
 </head>
 <body>
   <main class="deck" aria-label="Introduction to wealth management presentation">
-    <section class="slide compact-title" aria-label="Asset returns and volatility from 2005 to 2025">
+    <section class="slide cover-slide" aria-label="Presentation cover">
+      <div class="cover-content">
+        <p class="cover-kicker">Wealth Management Primer</p>
+        <h1 class="cover-title">Demystify Personal Wealth Management</h1>
+        <div class="cover-meta">
+          <p>May 2026</p>
+          <p>Ann Li · Fran Chen MSx '26</p>
+        </div>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Demystify Personal Wealth Management</div>
+        <div>Page 1 / 27</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Main sections covered">
+      <header class="header">
+        <div>
+          <p class="kicker">Agenda</p>
+          <h1>Main sections covered</h1>
+        </div>
+        <div class="page-tag">Page 2 / 27 · Agenda</div>
+      </header>
+
+      <div class="agenda-content">
+        <ul class="agenda-list">
+          <li>What's wealth</li>
+          <li>Construct your personal portfolio of assets</li>
+          <li>Fees and Taxes</li>
+        </ul>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Three sections, one practical portfolio lens.</div>
+        <div>May 2026</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title headline-hidden" aria-label="Asset returns and volatility from 2005 to 2025">
       <header class="header">
         <div>
           <p class="kicker">Introduction to Wealth Management</p>
           <h1>Equity, real estate, and gold led long-run returns, but each carried distinct volatility.</h1>
         </div>
-        <div class="page-tag">Page 1 / 9 · Asset Class Returns</div>
+        <div class="page-tag">Page 3 / 27 · Asset Class Returns</div>
       </header>
 
       <div class="content full-bleed-chart return-vol-chart">
         <figure class="chart-wrap">
-          <img src="assets/annual_return_volatility_2005_2025.svg" alt="Annualized return and volatility by asset class, 2005 to 2025">
+          <img src="assets/annual_return_volatility_2005_2025.svg?v=bitcoin-local" alt="Annualized return and volatility by asset class, including Bitcoin since July 2010">
         </figure>
       </div>
 
@@ -885,26 +2063,99 @@
       </footer>
     </section>
 
-    <section class="slide compact-title" aria-label="Interactive asset class return quilt">
+    <section class="slide compact-title headline-hidden" aria-label="Definition of wealth">
       <header class="header">
         <div>
-          <p class="kicker">Interactive Analysis</p>
-          <h1>Yet asset class returns vary each year; starting &amp; ending years influence heavily.</h1>
+          <p class="kicker">Introduction to Wealth Management</p>
+          <h1>Wealth is not a number; it is ownership of value-storing assets.</h1>
         </div>
-        <div class="page-tag">Page 2 / 9 · Return Quilt</div>
+        <div class="page-tag">Page 4 / 27 · What Is Wealth</div>
       </header>
 
-      <div class="interactive-content">
-        <iframe
-          class="interactive-frame"
-          src="assets/interactive_asset_class_return_quilt.html"
-          title="Interactive asset class return quilt"
-        ></iframe>
+      <div class="wealth-definition" data-wealth-animation data-step="0" role="button" tabindex="0" aria-label="Click to advance wealth definition">
+        <div class="wealth-step wealth-question is-active" data-wealth-step="0">
+          <p class="wealth-line">What is wealth<span class="question-mark">?</span></p>
+          <p class="wealth-click-hint">Click to continue</p>
+        </div>
+        <div class="wealth-step wealth-equation" data-wealth-step="1">
+          <div class="wealth-definition-fixed">
+            <p class="wealth-line">Wealth <span class="not-money">&ne; money</span>.</p>
+            <p class="wealth-line">Wealth = <span class="store-value">assets that store value</span>.</p>
+          </div>
+        </div>
+        <div class="wealth-step wealth-expand" data-wealth-step="2">
+          <div class="wealth-definition-fixed">
+            <p class="wealth-line">Wealth <span class="not-money">&ne; money</span>.</p>
+            <p class="wealth-line">Wealth = <span class="store-value">assets that store value</span>.</p>
+          </div>
+          <div class="wealth-expanded-categories">
+            <div class="wealth-expanded-row">
+              <p class="wealth-expanded-line"><strong>Productive assets</strong> <span>that generate cash flows</span></p>
+              <p class="wealth-expanded-examples">Equity, real estate, bonds...</p>
+            </div>
+            <div class="wealth-expanded-row">
+              <p class="wealth-expanded-line"><strong>Consensus assets</strong> <span>that aggregate belief via structural scarcity</span></p>
+              <p class="wealth-expanded-examples">Gold, bitcoin, jewelry...</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <footer class="footer">
-        <div><span class="brand">Wealth Management Primer</span> | Click a start year, then an end year; the final column recalculates annualized returns.</div>
-        <div>Source: Bloomberg and Morningstar</div>
+        <div><span class="brand">Wealth Management Primer</span> | The investment question is which assets can preserve or grow purchasing power over time.</div>
+        <div>Conceptual framework</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Premises that explain asset returns">
+      <header class="header">
+        <div>
+          <p class="kicker">Return Premises</p>
+          <h1>Why certain assets outperform in the long run</h1>
+        </div>
+        <div class="page-tag">Page 5 / 27 · Return Premises</div>
+      </header>
+
+      <div class="premise-content">
+        <section class="premise-group">
+          <div class="premise-group-header">
+            <span class="premise-group-title">Outperformers</span>
+            <span>Growing cash flows, structural scarcity</span>
+          </div>
+          <div class="premise-box-grid">
+            <div class="premise-asset-line premise-equity"><div class="premise-box"><span class="premise-box-name">Equity</span><span class="premise-box-type">Productive asset</span></div><ul class="premise-point"><li>Growing cash-flow ownership</li></ul></div>
+            <div class="premise-asset-line premise-real-estate"><div class="premise-box"><span class="premise-box-name">Real Estate</span><span class="premise-box-type">Productive asset</span></div><ul class="premise-point"><li>Growing rental income with location scarcity</li></ul></div>
+            <div class="premise-asset-line premise-gold"><div class="premise-box"><span class="premise-box-name">Gold</span><span class="premise-box-type">Consensus asset</span></div><ul class="premise-point"><li>Physical scarcity, 5000+ year narrative</li></ul></div>
+            <div class="premise-asset-line premise-bitcoin"><div class="premise-box"><span class="premise-box-name">Bitcoin</span><span class="premise-box-type">Consensus asset</span></div><ul class="premise-point"><li>Algorithmic scarcity, 17 year narrative (yet to prove itself)</li></ul></div>
+          </div>
+        </section>
+        <section class="premise-group">
+          <div class="premise-group-header">
+            <span class="premise-group-title">Underperformers</span>
+            <span>Fixed or no cash flows, no scarcity story</span>
+          </div>
+          <div class="premise-box-grid">
+            <div class="premise-asset-line premise-bonds"><div class="premise-box"><span class="premise-box-name">Bonds</span><span class="premise-box-type">Productive asset</span></div><ul class="premise-point"><li>Fixed cash flows (coupon rates)</li></ul></div>
+            <div class="premise-asset-line premise-commodities"><div class="premise-box"><span class="premise-box-name">Commodities</span><span class="premise-box-type">Consensus asset</span></div><ul class="premise-point"><li>Supply-demand cycles, lack of sustainable narratives</li></ul></div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Long-run return differences come from the nature of the claim investors own.</div>
+        <div>Conceptual framework</div>
+      </footer>
+    </section>
+
+    <section class="slide section-divider-slide" aria-label="Construct your personal portfolio of assets section">
+      <div class="section-divider-content">
+        <p class="section-kicker">Section 2</p>
+        <h1 class="section-title">Construct your personal portfolio of assets</h1>
+        <p class="section-subtitle">Understand the risks, what to buy and where to invest for each asset class.</p>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Construct your personal portfolio of assets</div>
+        <div>Page 6 / 27</div>
       </footer>
     </section>
 
@@ -912,16 +2163,16 @@
       <header class="header">
         <div>
           <p class="kicker">Strategy Choice</p>
-          <h1>Stable cashflows can maximize long-term growth through equity investing; uncertain cashflows call for diversified portfolios that optimize risk-adjusted returns.</h1>
+          <h1>Two strategies based on AUM sizes</h1>
         </div>
-        <div class="page-tag">Page 3 / 9 · Two Strategies</div>
+        <div class="page-tag">Page 7 / 27 · Two Strategies</div>
       </header>
 
       <div class="strategy-content">
         <article class="strategy-card">
           <div>
-            <p class="strategy-label">Stable Cashflows</p>
-            <p class="strategy-copy">Invest regularly in equities to maximize long-term accumulated return.</p>
+            <p class="strategy-label">If you start small</p>
+            <p class="strategy-copy">Invest regularly in public equities to maximize long-term accumulated return.</p>
           </div>
           <figure class="strategy-visual">
             <img src="assets/dca_accumulated_return_2005_2025.svg" alt="Accumulated value under a dollar-cost averaging strategy across asset classes, 2005 to 2025">
@@ -930,7 +2181,7 @@
 
         <article class="strategy-card">
           <div>
-            <p class="strategy-label">Uncertain Cashflows</p>
+            <p class="strategy-label">If you have extra capital &gt; $1 million</p>
             <p class="strategy-copy">Diversify the portfolio to improve the return earned for each unit of risk.</p>
           </div>
           <figure class="strategy-visual">
@@ -945,98 +2196,143 @@
       </footer>
     </section>
 
-    <section class="slide compact-title" aria-label="Commodity and gold investing considerations">
+    
+    
+    <section class="slide compact-title" aria-label="Public equity access modes">
       <header class="header">
         <div>
           <p class="kicker">Major Asset Classes</p>
-          <h1>Commodity &amp; gold are highly volatile markets with sophisticated investors, not for retail investors.</h1>
+          <h1>Public equity can be accessed three ways: pick individual stocks, hold a passive index vehicle, or hire an active manager.</h1>
         </div>
-        <div class="page-tag">Page 4 / 9 · Commodity &amp; Gold</div>
-      </header>
-
-      <div class="asset-detail">
-        <nav class="asset-menu" aria-label="Major asset class menu">
-          <p class="menu-label">Asset Class</p>
-          <div class="asset-tab">Equity</div>
-          <div class="asset-tab">Bond</div>
-          <div class="asset-tab active">Commodity &amp; Gold</div>
-        </nav>
-
-        <div class="asset-main">
-          <figure class="asset-chart">
-            <img src="assets/page4_commodity_supercycle_simplified.svg" alt="Simplified commodity supercycle chart showing sharp rallies and drawdowns">
-          </figure>
-          <figure class="asset-chart">
-            <img src="assets/page4_gold_decade_returns_simplified.svg" alt="Simplified gold decade return chart showing uneven returns concentrated in regime shifts">
-          </figure>
-
-          <aside class="gold-vehicle-box">
-            <div>
-              <h2>Retail DCA vehicle for gold exposure</h2>
-              <p>For regular investing, use listed physical gold ETFs or ETCs designed to track spot gold directly, ideally backed by allocated bullion and priced close to the local spot gold benchmark. Examples include <strong>GLD</strong>, <strong>IAU</strong>, <strong>GLDM</strong>, and <strong>SGOL</strong>.</p>
-            </div>
-            <ul>
-              <li>Prefer spot-linked physical gold ETFs/ETCs over gold miners, broad commodity funds, futures funds, leveraged products, or structured notes.</li>
-              <li>Check tracking error, expense ratio, liquidity, bid-ask spread, tax treatment, and whether units are physically backed.</li>
-              <li>DCA can smooth entry timing, but it does not remove gold's volatility or currency exposure.</li>
-            </ul>
-          </aside>
-        </div>
-      </div>
-
-      <footer class="footer">
-        <div><span class="brand">Wealth Management Primer</span> | Commodities and gold can diversify portfolios, but implementation details matter.</div>
-        <div>Sources: Wind, Bloomberg, JST database, BIS, OECD, CICC</div>
-      </footer>
-    </section>
-
-    <section class="slide compact-title" aria-label="Equity asset class public equity ETF placeholder">
-      <header class="header">
-        <div>
-          <p class="kicker">Major Asset Classes</p>
-          <h1>Equity: public markets can be accessed through passive and active ETFs.</h1>
-        </div>
-        <div class="page-tag">Page 5 / 9 · Equity</div>
+        <div class="page-tag">Page 8 / 27 · Public Equity</div>
       </header>
 
       <div class="asset-detail">
         <nav class="asset-menu" aria-label="Major asset class menu">
           <p class="menu-label">Asset Class</p>
           <div class="asset-tab equity-active">Equity</div>
-          <div class="sub-menu" aria-label="Equity submenu">
-            <div class="sub-tab active">Public Equity</div>
-            <div class="sub-tab">Alternatives</div>
-          </div>
+          <div class="sub-menu" aria-label="Equity submenu"><div class="sub-tab active">Public Equity</div><div class="sub-tab">Alternatives</div></div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
           <div class="asset-tab">Bond</div>
-          <div class="asset-tab">Commodity &amp; Gold</div>
+          <div class="asset-tab">Commodity</div>
         </nav>
 
-        <div class="placeholder-main">
-          <section class="placeholder-panel">
-            <h2>Passive ETFs</h2>
-            <p>Designed to track an index with transparent rules, broad diversification, and low cost. Useful as the portfolio core.</p>
-            <div class="placeholder-pill-row">
-              <span class="placeholder-pill">Index exposure</span>
-              <span class="placeholder-pill">Low turnover</span>
-              <span class="placeholder-pill">Cost control</span>
-            </div>
-          </section>
-
-          <section class="placeholder-panel">
-            <h2>Active ETFs</h2>
-            <p>Use portfolio manager discretion or systematic signals to seek excess return, risk control, income, or targeted themes.</p>
-            <div class="placeholder-pill-row">
-              <span class="placeholder-pill">Manager skill</span>
-              <span class="placeholder-pill">Factor tilts</span>
-              <span class="placeholder-pill">Risk budgeting</span>
-            </div>
-          </section>
+        <div class="public-equity-main">
+          <article class="public-equity-card"><p class="public-equity-label">Pick your own</p><h2>Single stock</h2><p>Buy individual company shares directly. Full control over selection and timing; no fund layer between you and the company.</p><div class="tradeoff-rule"></div><p class="tradeoff-label">Key trade-off</p><p class="tradeoff-copy">No fund fees, but you bear concentration risk, and your odds of beating the index are at best the same as professional active managers.</p></article>
+          <article class="public-equity-card passive"><p class="public-equity-label">Track the index</p><h2>Passive</h2><p>Vehicles built to replicate an index, including ETFs and index mutual funds. Transparent rules, broad diversification, low cost.</p><div class="tradeoff-rule"></div><p class="tradeoff-label">Key trade-off</p><p class="tradeoff-copy">Accepts market return with no alpha attempt. In efficient markets this is the bar most active managers fail to clear.</p></article>
+          <article class="public-equity-card active"><p class="public-equity-label">Hire a manager</p><h2>Active</h2><p>Active ETFs and active mutual funds use manager discretion or systematic signals aimed at delivering excess return.</p><div class="tradeoff-rule"></div><p class="tradeoff-label">Key trade-off</p><p class="tradeoff-copy">Pays for the chance of outperformance, but data shows the majority of active funds underperform after fees, and it gets worse over time.</p></article>
         </div>
       </div>
 
       <footer class="footer">
-        <div><span class="brand">Wealth Management Primer</span> | Placeholder for public equity ETF implementation: passive core, active satellite.</div>
-        <div>Page holder: Passive and active ETFs</div>
+        <div><span class="brand">Wealth Management Primer</span> | Three access modes for public equity; the next slide shows the long-run track record of active managers vs. the index.</div>
+        <div>Source: Wealth Management Primer team analysis · Categorization for educational purposes</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Public equity active manager record">
+      <header class="header">
+        <div>
+          <p class="kicker">Major Asset Classes</p>
+          <h1>Most active funds underperform the index, and it gets worse the longer you look.</h1>
+        </div>
+        <div class="page-tag">Page 9 / 27 · Public Equity</div>
+      </header>
+
+      <div class="asset-detail">
+        <nav class="asset-menu" aria-label="Major asset class menu">
+          <p class="menu-label">Asset Class</p>
+          <div class="asset-tab equity-active">Equity</div>
+          <div class="sub-menu" aria-label="Equity submenu"><div class="sub-tab active">Public Equity</div><div class="sub-tab">Alternatives</div></div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
+          <div class="asset-tab">Bond</div>
+          <div class="asset-tab">Commodity</div>
+        </nav>
+
+        <div class="spiva-main">
+          <figure class="spiva-chart-card"><img src="assets/spiva_active_funds_underperformance.png" alt="Share of active funds underperforming benchmark indexes over longer horizons"></figure>
+          <aside class="spiva-takeaway-panel">
+            <h2>Key Takeaways</h2>
+            <div class="spiva-takeaway"><span class="spiva-dot"></span><div><strong>Europe is hardest</strong><span>97% of EUR-denominated Europe-equity funds trailed the S&amp;P Europe 350 over 10 years.</span></div></div>
+            <div class="spiva-takeaway"><span class="spiva-dot"></span><div><strong>US close behind</strong><span>86% of US large-cap funds trailed the S&amp;P 500 over 10 years; 90% over 15 years.</span></div></div>
+            <div class="spiva-takeaway"><span class="spiva-dot"></span><div><strong>Japan offers more room</strong><span>Active funds did better in Japan, but still a clear minority beat the index.</span></div></div>
+            <div class="spiva-implication"><strong>Implication:</strong> DIY stock-picking faces the same headwind, without a fund's diversification.</div>
+          </aside>
+          <div class="spiva-basis"><strong>Basis of preparation:</strong> SPIVA methodology, S&amp;P Dow Jones Indices. Returns are <strong>net of fees</strong>; funds that merged or liquidated during the period are counted as underperforming (<strong>survivorship-adjusted</strong>). Headline statistic is count-based across active funds at the start of each horizon.</div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | The longer the horizon, the harder it gets.</div>
+        <div>Source: S&amp;P Dow Jones Indices SPIVA Scorecard, as of Dec 31, 2025</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Public equity account and vehicle choices">
+      <header class="header">
+        <div>
+          <p class="kicker">Major Asset Classes</p>
+          <h1>For recent graduates, start simple: automate salary into tax-advantaged public equity accounts first.</h1>
+        </div>
+        <div class="page-tag">Page 10 / 27 · Public Equity</div>
+      </header>
+
+      <div class="asset-detail">
+        <nav class="asset-menu" aria-label="Major asset class menu">
+          <p class="menu-label">Asset Class</p>
+          <div class="asset-tab equity-active">Equity</div>
+          <div class="sub-menu" aria-label="Equity submenu"><div class="sub-tab active">Public Equity</div><div class="sub-tab">Alternatives</div></div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
+          <div class="asset-tab">Bond</div>
+          <div class="asset-tab">Commodity</div>
+        </nav>
+
+        <div class="equity-vehicle-main">
+          <div class="equity-account-grid">
+            <article class="equity-account-card">
+              <h2>1. Capture employer match</h2>
+              <p><strong>Action:</strong> contribute to your 401(k) at least up to the full company match.</p>
+              <p>It is part of your salary package; skipping it is leaving compensation unused.</p>
+            </article>
+            <article class="equity-account-card">
+              <h2>2. Max Roth IRA</h2>
+              <p><strong>2026 quota:</strong> $7,500 under age 50, subject to income eligibility.</p>
+              <p>Use it for broad equity ETFs or low-cost index funds; qualified withdrawals are tax-free.</p>
+            </article>
+            <article class="equity-account-card">
+              <h2>3. Add taxable brokerage</h2>
+              <p><strong>Action:</strong> automate monthly buys after emergency cash and retirement contributions.</p>
+              <p>Keep it tax-efficient: broad ETFs, low turnover, and avoid frequent realized gains.</p>
+            </article>
+            <article class="equity-account-card">
+              <h2>4. Keep it boring</h2>
+              <p><strong>Default:</strong> target-date fund, total-market ETF, or S&amp;P 500 ETF.</p>
+              <p>Avoid turning early salary into concentrated employer stock or speculative trades.</p>
+            </article>
+          </div>
+
+          <aside class="equity-implication-card">
+            <h2>Practical order of operations</h2>
+            <div class="equity-tax-strip">
+              <div>401(k)<br>Match first</div>
+              <div>Roth IRA<br>$7,500</div>
+              <div>Taxable<br>After that</div>
+            </div>
+            <ul>
+              <li><strong>Build emergency cash first:</strong> 3-6 months of expenses before taking market risk aggressively.</li>
+              <li><strong>Automate on payday:</strong> invest before lifestyle inflation absorbs the raise.</li>
+              <li><strong>Graduate to an RIA later:</strong> useful when tax, equity comp, cross-border, or estate complexity becomes real.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Early career portfolio building is mostly automation, tax-advantaged space, and avoiding complexity too soon.</div>
+        <div>Source: IRS 2026 IRA contribution limits; Wealth Management Primer team analysis</div>
       </footer>
     </section>
 
@@ -1046,7 +2342,7 @@
           <p class="kicker">Major Asset Classes</p>
           <h1>Equity alternatives: hedge funds seek differentiated return streams, but require careful manager selection and risk controls.</h1>
         </div>
-        <div class="page-tag">Page 6 / 9 · Hedge Funds</div>
+        <div class="page-tag">Page 11 / 27 · Hedge Funds</div>
       </header>
 
       <div class="asset-detail">
@@ -1058,11 +2354,13 @@
             <div class="sub-tab active">Alternatives</div>
           </div>
           <div class="nested-sub-menu" aria-label="Equity alternatives submenu">
-            <div class="nested-sub-tab active">Hedge Funds</div>
-            <div class="nested-sub-tab">PE / VC</div>
+          <div class="nested-sub-tab active">Hedge Funds</div>
+          <div class="nested-sub-tab">PE / VC</div>
           </div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
           <div class="asset-tab">Bond</div>
-          <div class="asset-tab">Commodity &amp; Gold</div>
+          <div class="asset-tab">Commodity</div>
         </nav>
 
         <div class="hedge-main">
@@ -1099,7 +2397,7 @@
           <p class="kicker">Major Asset Classes</p>
           <h1>GP selection and vintage years are the two critical factors to consider for PE/VC.</h1>
         </div>
-        <div class="page-tag">Page 7 / 9 · PE / VC</div>
+        <div class="page-tag">Page 12 / 27 · PE / VC</div>
       </header>
 
       <div class="asset-detail">
@@ -1111,11 +2409,13 @@
             <div class="sub-tab active">Alternatives</div>
           </div>
           <div class="nested-sub-menu" aria-label="Equity alternatives submenu">
-            <div class="nested-sub-tab">Hedge Funds</div>
-            <div class="nested-sub-tab active">PE / VC</div>
+          <div class="nested-sub-tab">Hedge Funds</div>
+          <div class="nested-sub-tab active">PE / VC</div>
           </div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
           <div class="asset-tab">Bond</div>
-          <div class="asset-tab">Commodity &amp; Gold</div>
+          <div class="asset-tab">Commodity</div>
         </nav>
 
         <div class="pevc-main">
@@ -1143,7 +2443,7 @@
           <p class="kicker">Alternative Equity Access</p>
           <h1>Where to invest for alternative equity: private platforms use feeder fund structure for individual investors.</h1>
         </div>
-        <div class="page-tag">Page 8 / 9 · Platforms</div>
+        <div class="page-tag">Page 13 / 27 · Platforms</div>
       </header>
 
       <div class="asset-detail">
@@ -1155,11 +2455,13 @@
             <div class="sub-tab active">Alternatives</div>
           </div>
           <div class="nested-sub-menu" aria-label="Equity alternatives submenu">
-            <div class="nested-sub-tab">Hedge Funds</div>
-            <div class="nested-sub-tab active">PE / VC</div>
+          <div class="nested-sub-tab">Hedge Funds</div>
+          <div class="nested-sub-tab active">PE / VC</div>
           </div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
           <div class="asset-tab">Bond</div>
-          <div class="asset-tab">Commodity &amp; Gold</div>
+          <div class="asset-tab">Commodity</div>
         </nav>
 
         <div class="platform-main">
@@ -1257,7 +2559,7 @@
           <p class="kicker">Public Alternative Funds</p>
           <h1>Where to invest for alternative equity: publicly listed vehicles - watch out for premium and liquidity risk.</h1>
         </div>
-        <div class="page-tag">Page 9 / 9 · Listed Vehicles</div>
+        <div class="page-tag">Page 14 / 27 · Listed Vehicles</div>
       </header>
 
       <div class="asset-detail">
@@ -1269,11 +2571,13 @@
             <div class="sub-tab active">Alternatives</div>
           </div>
           <div class="nested-sub-menu" aria-label="Equity alternatives submenu">
-            <div class="nested-sub-tab active">Hedge Funds</div>
-            <div class="nested-sub-tab active">PE / VC</div>
+          <div class="nested-sub-tab active">Hedge Funds</div>
+          <div class="nested-sub-tab active">PE / VC</div>
           </div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
           <div class="asset-tab">Bond</div>
-          <div class="asset-tab">Commodity &amp; Gold</div>
+          <div class="asset-tab">Commodity</div>
         </nav>
 
         <div class="public-alt-main">
@@ -1293,6 +2597,483 @@
         <div>Sources: Robinhood, Fundrise, Pershing Square USA, NYLI, iMGP, Goldman Sachs</div>
       </footer>
     </section>
+
+    <section class="slide compact-title" aria-label="Gold investing considerations">
+      <header class="header">
+        <div>
+          <p class="kicker">Major Asset Classes</p>
+          <h1>Invest in gold only if you have a long-term strategy or in regime-shift periods.</h1>
+        </div>
+        <div class="page-tag">Page 15 / 27 · Gold</div>
+      </header>
+
+      <div class="asset-detail">
+        <nav class="asset-menu" aria-label="Major asset class menu">
+          <p class="menu-label">Asset Class</p>
+          <div class="asset-tab">Equity</div>
+          <div class="asset-tab gold-active">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
+          <div class="asset-tab">Bond</div>
+          <div class="asset-tab">Commodity</div>
+        </nav>
+
+        <div class="asset-main gold-vertical">
+          <figure class="asset-chart">
+            <img src="assets/page4_gold_decade_returns_simplified.svg" alt="Simplified gold decade return chart showing uneven returns concentrated in regime shifts">
+          </figure>
+
+          <aside class="gold-vehicle-box">
+            <div>
+              <h2>Retail DCA vehicle for gold exposure</h2>
+              <p>For regular investing, use listed physical gold ETFs or ETCs designed to track spot gold directly, ideally backed by allocated bullion and priced close to the local spot gold benchmark. Examples include <strong>GLD</strong>, <strong>IAU</strong>, <strong>GLDM</strong>, and <strong>SGOL</strong>.</p>
+            </div>
+            <ul>
+              <li>Prefer spot-linked physical gold ETFs/ETCs over gold miners, broad commodity funds, futures funds, leveraged products, or structured notes.</li>
+              <li>Check tracking error, expense ratio, liquidity, bid-ask spread, tax treatment, and whether units are physically backed.</li>
+              <li>DCA can smooth entry timing, but it does not remove gold's volatility or currency exposure.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Gold can diversify portfolios, but implementation details matter.</div>
+        <div>Sources: Wind, Bloomberg, JST database, BIS, OECD, CICC</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Bitcoin deep dive">
+      <header class="header">
+        <div>
+          <p class="kicker">Major Asset Classes</p>
+          <h1>Bitcoin is volatile by design; investors need a clear stance and disciplined position size.</h1>
+        </div>
+        <div class="page-tag">Page 16 / 27 · Bitcoin</div>
+      </header>
+
+      <div class="asset-detail">
+        <nav class="asset-menu" aria-label="Major asset class menu">
+          <p class="menu-label">Asset Class</p>
+          <div class="asset-tab">Equity</div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab bitcoin-active">Bitcoin</div>
+          <div class="asset-tab">Bond</div>
+          <div class="asset-tab">Commodity</div>
+        </nav>
+
+        <div class="bitcoin-main">
+          <figure class="bitcoin-chart-card">
+            <img src="assets/bitcoin_price_weekly_log_scale.svg" alt="Bitcoin weekly closing price on a log scale from 2016 to 2026 with major peaks and drawdowns">
+          </figure>
+
+          <aside class="bitcoin-decision-card">
+            <h2>Pick your stance, then size accordingly</h2>
+            <ul class="bitcoin-decision-list">
+              <li><span></span>If it's a diversifying asset, dollar-cost average and cap at 1-3%</li>
+              <li><span></span>If you don't believe it diversifies, don't invest</li>
+              <li><span></span>If you're speculating, size only what you can lose</li>
+            </ul>
+            <div class="bitcoin-bottom-line">
+              <p class="lbl">Bottom line</p>
+              <p>Build slowly, keep it small, never time the market.</p>
+            </div>
+          </aside>
+
+          <section class="bitcoin-etf-card">
+            <h2>Bitcoin ETF vehicles for dollar-cost averaging</h2>
+            <table class="bitcoin-etf-table">
+              <colgroup><col style="width:14%"><col style="width:45%"><col style="width:18%"><col style="width:23%"></colgroup>
+              <thead><tr><th>Ticker</th><th>Sponsor</th><th>Expense</th><th>Listing</th></tr></thead>
+              <tbody>
+                <tr><td class="ticker">IBIT</td><td>BlackRock iShares Bitcoin Trust</td><td>0.25%</td><td>NASDAQ · US</td></tr>
+                <tr><td class="ticker">FBTC</td><td>Fidelity Wise Origin BTC Fund</td><td>0.25%</td><td>Cboe BZX · US</td></tr>
+                <tr><td class="ticker">BITB</td><td>Bitwise Bitcoin ETF</td><td>0.20%</td><td>NYSE Arca · US</td></tr>
+                <tr><td class="ticker">ABTC</td><td>21Shares Bitcoin ETP</td><td>1.49%</td><td>SIX · Europe</td></tr>
+                <tr><td class="ticker">3439</td><td>Harvest Bitcoin Spot ETF</td><td>0.30%</td><td>HKEX · Hong Kong</td></tr>
+              </tbody>
+            </table>
+            <p class="mini-footnote">Spot-backed regulated wrappers; expense ratios from issuer fact sheets. Illustrative, not a recommendation.</p>
+          </section>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Crypto's role is a stance, not a timing call: pick yours, size to 1-3% if any, and dollar-cost average.</div>
+        <div>Sources: Yahoo Finance / CoinDesk / Bloomberg; ETF sponsor fact sheets &amp; SEC filings, justETF, HKEX</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Bond investing considerations">
+      <header class="header">
+        <div>
+          <p class="kicker">Major Asset Classes</p>
+          <h1>Bonds turn capital into fixed cash flows; match duration and credit risk to your spending needs.</h1>
+        </div>
+        <div class="page-tag">Page 17 / 27 · Bond</div>
+      </header>
+
+      <div class="asset-detail">
+        <nav class="asset-menu" aria-label="Major asset class menu">
+          <p class="menu-label">Asset Class</p>
+          <div class="asset-tab">Equity</div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
+          <div class="asset-tab bond-active">Bond</div>
+          <div class="asset-tab">Commodity</div>
+        </nav>
+
+        <div class="asset-main single-asset">
+          <section class="bond-practice-box">
+            <h2>What bonds are for</h2>
+            <p>Bonds are productive assets with fixed cash flows. They are most useful when the portfolio needs stability, liquidity, and known funding dates.</p>
+            <ul>
+              <li><strong>Match duration</strong> to when you need the money.</li>
+              <li><strong>Diversify credit risk</strong>; avoid reaching for yield blindly.</li>
+              <li><strong>Use low-cost funds or ladders</strong> for core exposure.</li>
+            </ul>
+          </section>
+
+          <section class="bond-practice-box">
+            <h2>Simple implementation</h2>
+            <div class="bond-ladder" aria-label="Illustrative bond ladder">
+              <div>Cash<br>0-1 yr</div>
+              <div>Short<br>1-3 yrs</div>
+              <div>Core<br>3-7 yrs</div>
+            </div>
+            <p>For near-term liabilities, favor Treasury bills, short-duration government bonds, or high-quality bond funds. For return-seeking credit exposure, size high-yield or emerging-market bonds as risk assets rather than cash substitutes.</p>
+          </section>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Bond allocation should start with cash-flow timing, then add duration and credit risk deliberately.</div>
+        <div>Source: Wealth Management Primer team analysis · Educational framework</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Commodity investing considerations">
+      <header class="header">
+        <div>
+          <p class="kicker">Major Asset Classes</p>
+          <h1>Commodities move in highly volatile supply-demand cycles, NOT for retail investors.</h1>
+        </div>
+        <div class="page-tag">Page 18 / 27 · Commodity</div>
+      </header>
+
+      <div class="asset-detail">
+        <nav class="asset-menu" aria-label="Major asset class menu">
+          <p class="menu-label">Asset Class</p>
+          <div class="asset-tab">Equity</div>
+          <div class="asset-tab">Gold</div>
+          <div class="asset-tab">Bitcoin</div>
+          <div class="asset-tab">Bond</div>
+          <div class="asset-tab commodity-active">Commodity</div>
+        </nav>
+
+        <div class="asset-main commodity-chart-only">
+          <figure class="asset-chart">
+            <img src="assets/page4_commodity_supercycle_simplified.svg" alt="Simplified commodity supercycle chart showing sharp rallies and drawdowns">
+          </figure>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Commodities can diversify portfolios, but cycles and implementation details dominate investor outcomes.</div>
+        <div>Sources: Wind, Bloomberg, JST database, BIS, OECD, CICC</div>
+      </footer>
+    </section>
+
+    <section class="slide section-divider-slide" aria-label="Fees and Taxes section">
+      <div class="section-divider-content">
+        <p class="section-kicker">Section 3</p>
+        <h1 class="section-title">Fees and Taxes</h1>
+        <p class="section-subtitle">Costs, withholding tax, fund domicile, and estate-tax exposure can materially change investor outcomes.</p>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Fees and Taxes</div>
+        <div>Page 19 / 27</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Non-market factors">
+      <header class="header">
+        <div>
+          <p class="kicker">Carver, Smart Portfolios (2017)</p>
+          <h1>Returns are uncertain &mdash; costs are not. Five non-market levers quietly compound.</h1>
+        </div>
+        <div class="page-tag">Page 20 / 27 · Non-market factors</div>
+      </header>
+      <div class="fees-content fees-two-col">
+        <div class="lever-list">
+          <p class="lever-title">The Five Levers You Control</p>
+          <article class="fees-card lever-item"><div class="lever-badge">1</div><div><h2>Vehicles</h2><p>ETF · Direct shares · Active fund · Synthetic ETN</p></div></article>
+          <article class="fees-card lever-item"><div class="lever-badge">2</div><div><h2>Broker / Platform</h2><p>Minimum commissions · Platform fees · Stamp duty</p></div></article>
+          <article class="fees-card lever-item"><div class="lever-badge">3</div><div><h2>Tax Wrapper</h2><p>ISA · SIPP · 401(k) · IRA</p></div></article>
+          <article class="fees-card lever-item"><div class="lever-badge">4</div><div><h2>Trading Behaviour</h2><p>Turnover · Limit orders · Order splitting</p></div></article>
+          <article class="fees-card lever-item"><div class="lever-badge">5</div><div><h2>Portfolio Construction</h2><p>Top-down handcrafting · Diversification breakeven</p></div></article>
+        </div>
+        <aside class="rule-card">
+          <section class="rule-banner">
+            <p class="rule-label">The "Rule of 20"</p>
+            <p class="rule-headline">1% in annual cost <strong>&asymp; 20%</strong> of lifetime wealth.</p>
+            <p class="rule-sub">Multiply any ongoing annual cost by ~20 to see its present-value drag over a typical investing lifetime.</p>
+          </section>
+          <section class="fees-card">
+            <h3>What does that mean in dollars?</h3>
+            <p class="rule-sub">$100,000 invested for 30 years at 8% pre-cost return:</p>
+            <table class="fees-table" aria-label="Compound drag of annual costs on a $100k, 30-year, 8% portfolio">
+              <thead><tr><th>Annual cost</th><th class="num">Final value</th><th class="num">Lost vs no cost</th></tr></thead>
+              <tbody>
+                <tr><td>0 bp</td><td class="num">$1,006,266</td><td class="num">&mdash;</td></tr>
+                <tr><td>10 bp</td><td class="num">$978,686</td><td class="num"><span class="loss-bar"><span style="width:6%"></span></span>&minus;$27,580 (2.7%)</td></tr>
+                <tr><td>50 bp</td><td class="num">$875,496</td><td class="num"><span class="loss-bar"><span style="width:30%"></span></span>&minus;$130,770 (13%)</td></tr>
+                <tr><td>100 bp</td><td class="num">$761,226</td><td class="num"><span class="loss-bar"><span style="width:57%"></span></span>&minus;$245,040 (24%)</td></tr>
+                <tr><td>200 bp</td><td class="num">$574,349</td><td class="num"><span class="loss-bar"><span style="width:100%"></span></span>&minus;$431,917 (43%)</td></tr>
+              </tbody>
+            </table>
+          </section>
+        </aside>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Markets you can't predict &mdash; these five levers, you can.</div>
+        <div>Source: Carver, R. (2017), <em>Smart Portfolios</em>; compound drag illustration calculated at $100k, 30 yrs, 8% pre-cost.</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="AGTHX fee drag case study">
+      <header class="header">
+        <div>
+          <p class="kicker">Active Fund Fee Drag</p>
+          <h1>Active fund fee drag &mdash; case study on The Growth Fund of America (AGTHX)</h1>
+          <p class="subtitle">$10,000 invested 12/31/2015 &rarr; 12/31/2025, net of all fees and federal tax</p>
+        </div>
+        <div class="page-tag">Page 21 / 27 · AGTHX</div>
+      </header>
+      <div class="figure-content">
+        <figure class="figure-card">
+          <img src="assets/agthx_fee_drag_waterfall.png" alt="AGTHX annualized return waterfall from gross return to A-share net to investor">
+        </figure>
+        <p class="evidence-note"><strong>Notes:</strong> NAV = return after fund expense ratio, before front-end load. MOP = return after expense ratio and 5.75% front-end sales load. AGTHX gross, load drag, tax drag, and SPY net-to-investor reference are derived from the cited fund fact sheets, prospectuses, and SPIVA methodology.</p>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | AGTHX outperformed at NAV, but load, tax, and fee implementation changed the investor result.</div>
+        <div>Sources: AGTHX Summary Prospectus; Capital Group Q4 2025 Fact Sheet; SPY Prospectus; SPIVA U.S. Year-End 2024 Scorecard.</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="AGTHX versus SPY investor outcome">
+      <header class="header">
+        <div>
+          <p class="kicker">Active Fund Fee Drag</p>
+          <h1>Active fund fee drag &mdash; case study on The Growth Fund of America (AGTHX)</h1>
+          <p class="subtitle">$10,000 invested 12/31/2015 &rarr; 12/31/2025, net of all fees and federal tax</p>
+        </div>
+        <div class="page-tag">Page 22 / 27 · AGTHX</div>
+      </header>
+      <div class="figure-content">
+        <figure class="figure-card">
+          <img src="assets/agthx_spy_outcome.png" alt="Ten-year portfolio value comparison of SPY and AGTHX A-share net of fees and tax">
+        </figure>
+        <div class="callout-row">
+          <div class="diff-card"><p class="diff-value">+$5,395</p><p class="diff-label">additional ending wealth from SPY / S&amp;P 500 versus AGTHX A-share on the original $10,000 investment</p></div>
+          <div class="diff-card"><p class="diff-value">+16.6%</p><p class="diff-label">higher ending wealth for SPY / S&amp;P 500 versus AGTHX A-share, derived from $37,926 vs $32,531</p></div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Smooth-rate values use the same derived net annual rates as the prior waterfall: AGTHX A-share 12.52%/yr; SPY net 14.26%/yr.</div>
+        <div>Sources: AGTHX Q4 2025 Fact Sheet; AGTHX Summary Prospectus; SPY Prospectus.</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Non-resident investor US tax rates">
+      <header class="header">
+        <div>
+          <p class="kicker">Tax considerations for non-residents</p>
+          <h1>If you're not a US citizen or green card holder, two US tax rates can quietly cost you tens of thousands of dollars.</h1>
+        </div>
+        <div class="page-tag">Page 23 / 27 · The Hook</div>
+      </header>
+      <div class="fees-content hook-numbers-native">
+        <section class="fees-card tax-hero-card green">
+          <p class="tax-hero-label">Withholding Tax</p>
+          <p class="tax-hero-num">30%</p>
+          <p class="tax-caption">on US-source dividends <small>Treaty rates can reduce this to 15%, 10%, or 0% &mdash; depending on your country.</small></p>
+        </section>
+        <div class="hook-divider-native"></div>
+        <section class="fees-card tax-hero-card gold">
+          <p class="tax-hero-label">Estate Tax</p>
+          <p class="tax-hero-num">40%</p>
+          <p class="tax-caption">top rate on US-situs assets above $60K <small>15 countries have estate-tax treaties &mdash; everyone else gets the default rule.</small></p>
+        </section>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Two US tax rates that quietly shape returns and estates for non-resident investors.</div>
+        <div>Sources: IRC §871(a); IRC §2001(c); IRS Form 706-NA</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Withholding tax and Irish ETF workaround">
+      <header class="header">
+        <div>
+          <p class="kicker">Tax considerations for non-residents · 1 of 2</p>
+          <h1>Withholding tax: a 30% dividend drag that compounds year after year &mdash; unless you choose the right fund domicile.</h1>
+        </div>
+        <div class="page-tag">Page 24 / 27 · Withholding</div>
+      </header>
+      <div class="fees-content fees-left-narrow">
+        <section class="fees-card">
+          <p class="with-big">30%</p>
+          <p class="with-label">on US-source dividends <small>Applies to NRAs holding US-domiciled funds or stocks. Largely permanent &mdash; no reclaim.</small></p>
+          <ul class="with-points-native">
+            <li><strong>Treaty rate</strong> drops to <strong>15%</strong> for most major treaty countries.</li>
+            <li><strong>Common workaround:</strong> Irish-domiciled UCITS ETFs, where the fund is taxed at 15% at source.</li>
+            <li><strong>Compounding matters:</strong> a small annual gap grows quickly over 20 years.</li>
+          </ul>
+        </section>
+        <section class="fees-card">
+          <h2>Irish-domiciled ETF advantage</h2>
+          <div class="with-callout-native">
+            <div class="with-callout-cell"><p class="with-callout-big">0.20%</p><p class="with-callout-label">lower annual drag <small>vs. holding a US-domiciled S&amp;P 500 ETF</small></p></div>
+            <div class="with-callout-cell"><p class="with-callout-big">~$23K</p><p class="with-callout-label">more wealth after 20 years <small>on $100K invested ($644K vs $621K)</small></p></div>
+          </div>
+          <table class="fees-table">
+            <thead><tr><th>Cheapest S&amp;P 500 ETF</th><th class="num">SPYM<br><small>US-domiciled</small></th><th class="num">SPY5<br><small>Irish-domiciled</small></th></tr></thead>
+            <tbody>
+              <tr><td>Total Expense Ratio</td><td class="num">0.02%</td><td class="num">0.03%</td></tr>
+              <tr><td>US withholding on dividends</td><td class="num">30%<br><small>final, no reclaim</small></td><td class="num">15%<br><small>via treaty</small></td></tr>
+              <tr><td>Dividend drag<br><small>assuming 1.39% S&amp;P 500 yield</small></td><td class="num">0.42%</td><td class="num">0.21%</td></tr>
+              <tr><td><strong>Total annual drag</strong></td><td class="num"><strong>0.44%</strong></td><td class="num"><strong style="color:var(--accent);">0.24%</strong></td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Caveat: ~65+ countries have US income tax treaties &mdash; rates and limitations-on-benefits vary. Check your country's treaty.</div>
+        <div>Sources: IRC §871(a); US-Ireland Treaty Art. 10; SSGA SPYM &amp; SPY5 factsheets (2026); S&amp;P DJI Q4 2025 dividend report</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Estate tax on US situs assets">
+      <header class="header">
+        <div>
+          <p class="kicker">Tax considerations for non-residents · 2 of 2</p>
+          <h1>Estate tax: only the first $60K of US-situs assets is exempt &mdash; everything above is taxed at up to 40%.</h1>
+        </div>
+        <div class="page-tag">Page 25 / 27 · Estate Tax</div>
+      </header>
+      <div class="fees-content estate-content">
+        <div class="estate-hero">
+          <section class="fees-card estate-side"><p class="estate-tag">Non-resident, non-citizen</p><p class="estate-num nra">$60K</p><p class="estate-sub">exemption on US-situs assets</p></section>
+          <section class="fees-card estate-ratio"><p>The citizen exemption is <strong>~250×</strong> larger than the NRA exemption.</p></section>
+          <section class="fees-card estate-side"><p class="estate-tag">US citizen or resident</p><p class="estate-num cit">$15M</p><p class="estate-sub">basic exclusion (2026)</p></section>
+        </div>
+        <div class="estate-bottom">
+          <div class="stat-stack">
+            <section class="fees-card stat-card warn"><p class="stat-label">Top rate above $1M</p><p class="stat-value">40%<small>effective since 2013</small></p></section>
+            <section class="fees-card stat-card"><p class="stat-label">Threshold last raised</p><p class="stat-value">1988<small>not indexed for inflation</small></p></section>
+          </div>
+          <div class="stat-stack">
+            <section class="fees-card"><p class="text-card-title">Treaty exception · 15 countries</p><p class="text-card-copy">Each country has an estate-tax treaty raising the exemption and/or lowering the rate. <strong>Read the specific treaty.</strong><span class="countries">UK · Germany · France · Japan · Canada · Australia · Netherlands · Switzerland · Italy · Denmark · Ireland · Austria · Finland · Greece · South Africa</span></p></section>
+            <section class="fees-card"><p class="text-card-title">Workaround · Foreign corp wrapper</p><p class="text-card-copy">Hold US assets through a foreign corporation where you are the 100% shareholder. Foreign-corp shares are <strong>not US-situs</strong>.<span class="chain">You &rarr; Foreign Corp &rarr; US Assets</span><span class="caveat">Trade-offs: setup and annual costs; CFC/PFIC risk; generally must be in place before acquiring US assets.</span></p></section>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | "Resident" for estate tax = domicile (intent-based), not the Substantial Presence Test used for income tax.</div>
+        <div>Sources: IRS Form 706-NA; IRC §2001(c), §2010(c)(3); Rev. Proc. 2025-32</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Ending recap">
+      <header class="header">
+        <div>
+          <p class="kicker">Closing Recap</p>
+          <h1>Key lessons: own value-storing assets, choose implementation carefully, and watch costs.</h1>
+        </div>
+        <div class="page-tag">Page 26 / 27 · Recap</div>
+      </header>
+
+      <div class="ending-content">
+        <section class="ending-row one">
+          <div class="ending-section-box">Section 1</div>
+          <div class="ending-takeaway-box">
+            <p><strong>Wealth = assets that store value</strong> (productive asset vs consensus asset).</p>
+          </div>
+        </section>
+
+        <section class="ending-row two">
+          <div class="ending-section-box">Section 2</div>
+          <div class="ending-takeaway-box">
+            <ul>
+              <li><strong>Equity:</strong> two strategies based on AUM size.</li>
+              <li><strong>Gold &amp; Bitcoin:</strong> long-term view, small positions.</li>
+              <li><strong>Bonds:</strong> safer than bond funds when held to maturity.</li>
+              <li><strong>Commodities:</strong> do not invest as a retail investor.</li>
+              <li><em>Insurance is not for investment.</em></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="ending-row three">
+          <div class="ending-section-box">Section 3</div>
+          <div class="ending-takeaway-box">
+            <ul>
+              <li><strong>Fees compound:</strong> small annual costs become large lifetime drag.</li>
+              <li><strong>Taxes and wrappers matter:</strong> account type, domicile, withholding, and estate rules shape after-tax returns.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Build wealth by matching asset class, account wrapper, risk, and time horizon.</div>
+        <div>Closing recap</div>
+      </footer>
+    </section>
+
+    <section class="slide compact-title" aria-label="Appendix interactive asset class return quilt">
+      <header class="header">
+        <div>
+          <p class="kicker">Appendix</p>
+          <h1>Asset returns vary if you invest &lt;20 years; starting &amp; ending years matter.</h1>
+        </div>
+        <div class="page-tag">Page 27 / 27 · Return Quilt</div>
+      </header>
+
+      <div class="interactive-content">
+        <iframe
+          class="interactive-frame"
+          src="assets/interactive_asset_class_return_quilt.html"
+          title="Interactive asset class return quilt"
+        ></iframe>
+      </div>
+
+      <footer class="footer">
+        <div><span class="brand">Wealth Management Primer</span> | Appendix: click a start year, then an end year; the final column recalculates annualized returns.</div>
+        <div>Source: Bloomberg and Morningstar</div>
+      </footer>
+    </section>
   </main>
+  <script>
+    document.querySelectorAll('[data-wealth-animation]').forEach((container) => {
+      const steps = Array.from(container.querySelectorAll('[data-wealth-step]'));
+      const showStep = (nextStep) => {
+        const step = Math.max(0, Math.min(nextStep, steps.length - 1));
+        container.dataset.step = String(step);
+        steps.forEach((item) => item.classList.toggle('is-active', item.dataset.wealthStep === String(step)));
+      };
+      const advance = () => {
+        const current = Number(container.dataset.step || 0);
+        showStep(current >= steps.length - 1 ? 0 : current + 1);
+      };
+      container.addEventListener('click', advance);
+      container.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          advance();
+        }
+      });
+    });
+  </script>
 </body>
 </html>

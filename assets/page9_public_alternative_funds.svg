@@ -51,7 +51,7 @@
   <text x="590" y="192" class="body">Private tech / AI basket including Anthropic,</text>
   <text x="590" y="206" class="body">Databricks, OpenAI, SpaceX, Anduril, Ramp</text>
   <text x="590" y="220" class="body">and other venture-backed companies.</text>
-  <text x="930" y="194" class="nav" fill="#8f302c">User-provided: NAV ~$19; px ~$250</text>
+  <text x="930" y="194" class="nav" fill="#8f302c">NAV ~$19; px ~$250</text>
   <text x="930" y="209" class="nav" fill="#8f302c">as of 14 May 2026; ~+1,216% premium</text>
 
   <line x1="18" y1="281" x2="1200" y2="281" stroke="#eee5db"/>
