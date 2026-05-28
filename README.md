@@ -15,7 +15,7 @@ The deck is designed for recent graduates, early-career professionals, and perso
 
 ## View The Deck
 
-[Open the latest deck](https://the-wandering-poet.github.io/wealth-management-intro-deck/)
+[Open the latest deck](https://the-wandering-poet.github.io/personal-wealth-management-intro-series/)
 
 Scroll vertically to move through the presentation. Keyboard arrows, spacebar, and page up/down also jump between slides.
 
@@ -46,4 +46,4 @@ Coordinate page ownership when two people are editing the same HTML file. Merge 
 
 If this deck is useful, please star the repository so others can find it:
 
-[Star the repo](https://github.com/the-wandering-poet/wealth-management-intro-deck)
+[Star the repo](https://github.com/the-wandering-poet/personal-wealth-management-intro-series)

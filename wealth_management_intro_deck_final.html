@@ -4993,7 +4993,7 @@
           <p>What was unclear, useful, missing, or worth expanding? Your notes help us improve the next version.</p>
           <textarea class="feedback-box" id="deck-feedback-text" placeholder="Type your comment or question here..."></textarea>
           <div class="feedback-actions">
-            <a class="feedback-button" id="deck-feedback-issue" href="https://github.com/the-wandering-poet/wealth-management-intro-deck/issues/new?title=Feedback%20on%20wealth%20management%20intro%20deck&body=I%20have%20feedback%20on%20the%20wealth%20management%20intro%20deck%3A%0A%0A" target="_blank" rel="noopener">Submit via GitHub issue</a>
+            <a class="feedback-button" id="deck-feedback-issue" href="https://github.com/the-wandering-poet/personal-wealth-management-intro-series/issues/new?title=Feedback%20on%20wealth%20management%20intro%20deck&body=I%20have%20feedback%20on%20the%20wealth%20management%20intro%20deck%3A%0A%0A" target="_blank" rel="noopener">Submit via GitHub issue</a>
             <button class="feedback-button secondary" type="button" id="deck-feedback-copy">Copy comment</button>
           </div>
           <div class="feedback-note" id="deck-feedback-note">GitHub issues are the easiest no-backend way for us to track comments and get notified.</div>
@@ -5002,7 +5002,7 @@
         <section class="feedback-side-card">
           <h2>If this helped, star the repo</h2>
           <p>Starring helps others find the deck and lets us know the content is useful.</p>
-          <a class="repo-star-link" href="https://github.com/the-wandering-poet/wealth-management-intro-deck" target="_blank" rel="noopener">Open GitHub repo</a>
+          <a class="repo-star-link" href="https://github.com/the-wandering-poet/personal-wealth-management-intro-series" target="_blank" rel="noopener">Open GitHub repo</a>
           <ul class="feedback-mini-list">
             <li>View or download the latest HTML deck.</li>
             <li>Open an issue for questions or suggested edits.</li>
@@ -5198,7 +5198,7 @@
       const note = document.querySelector('#deck-feedback-note');
       if (!textBox || !issueLink || !copyButton) return;
 
-      const baseUrl = 'https://github.com/the-wandering-poet/wealth-management-intro-deck/issues/new';
+      const baseUrl = 'https://github.com/the-wandering-poet/personal-wealth-management-intro-series/issues/new';
       const updateIssueLink = () => {
         const comment = textBox.value.trim();
         const body = comment
