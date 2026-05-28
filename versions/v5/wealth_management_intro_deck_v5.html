@@ -30,10 +30,12 @@
       color: var(--ink);
       background: #efe8df;
       font-family: Inter, Arial, Helvetica, sans-serif;
+      overflow: hidden;
     }
 
     .deck {
       min-height: 100vh;
+      height: 100vh;
       display: grid;
       place-items: center;
       padding: 28px;
@@ -42,6 +44,7 @@
 
     .slide {
       width: min(100%, 1440px);
+      max-height: calc(100vh - 56px);
       aspect-ratio: 16 / 9;
       background: var(--paper);
       border: 1px solid var(--line);
@@ -49,6 +52,58 @@
       display: grid;
       grid-template-rows: auto 1fr auto;
       overflow: hidden;
+    }
+
+    .deck.presentation-mode .slide {
+      display: none;
+    }
+
+    .deck.presentation-mode .slide.is-active {
+      display: grid;
+    }
+
+    .presentation-controls {
+      position: fixed;
+      right: 22px;
+      bottom: 18px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px;
+      border: 1px solid rgba(93, 105, 112, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.88);
+      box-shadow: 0 12px 30px rgba(55, 42, 31, 0.16);
+      backdrop-filter: blur(10px);
+    }
+
+    .presentation-controls button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--panel);
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .presentation-controls button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .presentation-counter {
+      min-width: 70px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 780;
+      text-align: center;
+      user-select: none;
     }
 
     /* Full-bleed PPTX-image slides: faithful render of the source PowerPoint slide. */
@@ -2026,8 +2081,18 @@
 
       .slide {
         width: 100%;
+        max-height: none;
         min-height: 100vh;
         aspect-ratio: auto;
+      }
+
+      .deck.presentation-mode .slide {
+        min-height: 100vh;
+      }
+
+      .presentation-controls {
+        right: 12px;
+        bottom: 12px;
       }
 
       .header,
@@ -3312,7 +3377,7 @@
 
       <div class="content full-bleed-chart return-vol-chart">
         <figure class="chart-wrap">
-          <img src="assets/annual_return_volatility_2005_2025.svg?v=bitcoin-local" alt="Annualized return and volatility by asset class, including Bitcoin since July 2010">
+          <img src="../../assets/charts/annual_return_volatility_2005_2025.svg?v=bitcoin-local" alt="Annualized return and volatility by asset class, including Bitcoin since July 2010">
         </figure>
       </div>
 
@@ -3434,7 +3499,7 @@
             <p class="strategy-copy">Invest regularly in public equities to maximize long-term accumulated return.</p>
           </div>
           <figure class="strategy-visual">
-            <img src="assets/dca_accumulated_return_2005_2025.svg" alt="Accumulated value under a dollar-cost averaging strategy across asset classes, 2005 to 2025">
+            <img src="../../assets/charts/dca_accumulated_return_2005_2025.svg" alt="Accumulated value under a dollar-cost averaging strategy across asset classes, 2005 to 2025">
           </figure>
         </article>
 
@@ -3444,7 +3509,7 @@
             <p class="strategy-copy">Diversify the portfolio to improve the return earned for each unit of risk.</p>
           </div>
           <figure class="strategy-visual">
-            <img src="assets/portfolio_risk_return_alternatives.svg" alt="Portfolio risk and return comparison with and without alternatives">
+            <img src="../../assets/charts/portfolio_risk_return_alternatives.svg" alt="Portfolio risk and return comparison with and without alternatives">
           </figure>
         </article>
       </div>
@@ -3493,7 +3558,7 @@
             </ul>
           </article>
           <article class="public-equity-card source-card active">
-            <p class="public-equity-label">Hire a manager</p>
+            <p class="public-equity-label">Buy a mutual fund</p>
             <h2>Active</h2>
             <ul class="source-bullets">
               <li>Expensive</li>
@@ -3530,7 +3595,7 @@
         </nav>
 
         <div class="spiva-main">
-          <figure class="spiva-chart-card"><img src="assets/spiva_active_funds_underperformance.png" alt="Share of active funds underperforming benchmark indexes over longer horizons"></figure>
+          <figure class="spiva-chart-card"><img src="../../assets/images/spiva_active_funds_underperformance.png" alt="Share of active funds underperforming benchmark indexes over longer horizons"></figure>
           <aside class="spiva-warning-card">
             <div class="warning-mark">!</div>
             <p><em>Individual stock traders underperform the market by ~6.5%/yr after costs</em> (Barber &amp; Odean, 2000) &mdash; and lose diversification.</p>
@@ -3657,7 +3722,7 @@
 
           <div class="hedge-selection-panel">
             <section class="hedge-gp-card excel-card">
-              <img src="assets/page11_hedge_fund_gp_excel.svg" alt="Excel-style table of three illustrative hedge fund GP statistics">
+              <img src="../../assets/charts/page11_hedge_fund_gp_excel.svg" alt="Excel-style table of three illustrative hedge fund GP statistics">
             </section>
 
             <section class="hedge-buyer-card">
@@ -3851,7 +3916,7 @@
 
         <div class="public-alt-main vehicle-chart-main">
           <figure class="public-alt-visual">
-            <img src="assets/page14_public_alt_vehicles_simplified.svg" alt="Example public listed vehicles for alternative strategies, simplified to key columns">
+            <img src="../../assets/charts/page14_public_alt_vehicles_simplified.svg" alt="Example public listed vehicles for alternative strategies, simplified to key columns">
           </figure>
         </div>
       </div>
@@ -4062,7 +4127,7 @@
 
         <div class="bitcoin-source-main">
           <figure class="bitcoin-source-chart">
-            <img src="assets/bitcoin_price_weekly_log_scale.svg" alt="Bitcoin weekly closing price on a log scale from 2016 to 2026 with major peaks and drawdowns">
+            <img src="../../assets/charts/bitcoin_price_weekly_log_scale.svg" alt="Bitcoin weekly closing price on a log scale from 2016 to 2026 with major peaks and drawdowns">
           </figure>
           <div class="bitcoin-stance-row">
             <article class="bitcoin-stance-card"><span class="dot"></span><p>If it's a diversifying asset &rarr; dollar-cost average in Bitcoin ETFs, cap at 1-3%</p></article>
@@ -4146,7 +4211,7 @@
       </header>
       <div class="figure-content">
         <figure class="figure-card">
-          <img src="assets/agthx_fee_drag_waterfall.png" alt="AGTHX annualized return waterfall from gross return to A-share net to investor">
+          <img src="../../assets/images/agthx_fee_drag_waterfall.png" alt="AGTHX annualized return waterfall from gross return to A-share net to investor">
         </figure>
         <p class="evidence-note"><strong>Notes:</strong> NAV = Net Asset Value (return after fund expense ratio, before the front-end sales load). MOP = Maximum Offering Price (return after both expense ratio and the 5.75% front-end load). AGTHX 10-yr returns (Capital Group Q4 2025 fact sheet): 15.15% at NAV; 14.47% at MOP. AGTHX gross 15.74% = NAV + 0.59% expense ratio (DERIVED). Load drag = NAV &minus; MOP = 0.68 pp/yr (DERIVED). AGTHX tax drag 1.95 pp/yr = Class F-2 (no-load) 10-yr before-tax (13.91%) &minus; after-tax-on-distributions (11.96%) from AGTHX summary prospectus (12/31/2024, highest US federal individual rate, no state/local tax), applied as representative-year proxy. SPY net-to-investor 14.26% = S&amp;P 500 14.82% &minus; SPY expense 0.0945% &minus; SPY tax drag 0.47 pp/yr (SPY prospectus 12/31/2024). AGTHX outperformance vs S&amp;P 500 at NAV (+0.33 pp/yr) is on the SPIVA basis (after fund expenses, before load and tax).</p>
       </div>
@@ -4167,7 +4232,7 @@
       </header>
       <div class="figure-content">
         <figure class="figure-card">
-          <img src="assets/agthx_spy_outcome.png" alt="Ten-year portfolio value comparison of SPY and AGTHX A-share net of fees and tax">
+          <img src="../../assets/images/agthx_spy_outcome.png" alt="Ten-year portfolio value comparison of SPY and AGTHX A-share net of fees and tax">
         </figure>
         <div class="callout-row">
           <div class="diff-card"><p class="diff-value">+$5,395</p><p class="diff-label">additional ending wealth from SPY / S&amp;P 500 versus AGTHX A-share on the original $10,000 investment</p></div>
@@ -4495,7 +4560,7 @@
       <div class="interactive-content">
         <iframe
           class="interactive-frame"
-          src="assets/interactive_asset_class_return_quilt.html"
+          src="../../assets/interactive/interactive_asset_class_return_quilt.html"
           title="Interactive asset class return quilt"
         ></iframe>
       </div>
@@ -4571,6 +4636,90 @@
 
   </main>
   <script>
+    (() => {
+      const deck = document.querySelector('.deck');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      if (!deck || !slides.length) return;
+
+      deck.classList.add('presentation-mode');
+
+      const controls = document.createElement('nav');
+      controls.className = 'presentation-controls';
+      controls.setAttribute('aria-label', 'Slide navigation');
+      controls.innerHTML = `
+        <button type="button" class="presentation-prev" aria-label="Previous slide">&lsaquo;</button>
+        <span class="presentation-counter" aria-live="polite"></span>
+        <button type="button" class="presentation-next" aria-label="Next slide">&rsaquo;</button>
+      `;
+      document.body.appendChild(controls);
+
+      const counter = controls.querySelector('.presentation-counter');
+      const prevButton = controls.querySelector('.presentation-prev');
+      const nextButton = controls.querySelector('.presentation-next');
+      let current = 0;
+
+      const parseHash = () => {
+        const match = window.location.hash.match(/^#slide-(\d+)$/);
+        if (!match) return 0;
+        return Math.max(0, Math.min(Number(match[1]) - 1, slides.length - 1));
+      };
+
+      const showSlide = (index, updateHash = true) => {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, slideIndex) => {
+          const isActive = slideIndex === current;
+          slide.classList.toggle('is-active', isActive);
+          slide.toggleAttribute('hidden', !isActive);
+        });
+        counter.textContent = `${current + 1} / ${slides.length}`;
+        prevButton.disabled = current === 0;
+        nextButton.disabled = current === slides.length - 1;
+        if (updateHash) {
+          history.replaceState(null, '', `#slide-${current + 1}`);
+        }
+      };
+
+      const nextSlide = () => showSlide(current + 1);
+      const prevSlide = () => showSlide(current - 1);
+
+      prevButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        prevSlide();
+      });
+      nextButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        nextSlide();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        const tagName = event.target?.tagName?.toLowerCase();
+        if (['input', 'textarea', 'select', 'button'].includes(tagName)) return;
+        if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
+          event.preventDefault();
+          nextSlide();
+        } else if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+          event.preventDefault();
+          prevSlide();
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          showSlide(0);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          showSlide(slides.length - 1);
+        }
+      });
+
+      slides.forEach((slide) => {
+        slide.addEventListener('click', (event) => {
+          if (event.target.closest('a, button, input, textarea, select, iframe, [data-wealth-animation]')) return;
+          nextSlide();
+        });
+      });
+
+      window.addEventListener('hashchange', () => showSlide(parseHash(), false));
+      showSlide(parseHash(), false);
+    })();
+
     document.querySelectorAll('[data-wealth-animation]').forEach((container) => {
       const steps = Array.from(container.querySelectorAll('[data-wealth-step]'));
       const showStep = (nextStep) => {
