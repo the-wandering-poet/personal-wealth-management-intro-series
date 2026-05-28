@@ -2229,253 +2229,37 @@
 
     @media (max-width: 920px) {
       body {
+        display: block;
         overflow: auto;
       }
 
       .deck {
         padding: 0;
-        height: auto;
-        min-height: 100dvh;
+        display: block;
+        place-items: unset;
+        width: calc(1440px * var(--mobile-slide-scale, 1));
+        height: calc(810px * var(--mobile-slide-scale, 1));
+        min-height: calc(810px * var(--mobile-slide-scale, 1));
       }
 
       .slide {
-        width: 100%;
+        width: 1440px;
+        height: 810px;
         max-height: none;
-        min-height: 100dvh;
+        min-height: 0;
         aspect-ratio: auto;
-        overflow-y: auto;
-        overflow-x: hidden;
+        overflow: hidden;
+        transform: scale(var(--mobile-slide-scale, 1));
+        transform-origin: top left;
       }
 
       .deck.presentation-mode .slide {
-        min-height: 100dvh;
+        min-height: 0;
       }
 
       .presentation-controls {
         right: 12px;
         bottom: 12px;
-      }
-
-      .header,
-      .content,
-      .footer {
-        padding-left: clamp(14px, 5vw, 24px);
-        padding-right: clamp(14px, 5vw, 24px);
-      }
-
-      .header {
-        grid-template-columns: 1fr;
-      }
-
-      .page-tag {
-        text-align: left;
-        font-size: 13px;
-      }
-
-      h1 {
-        font-size: clamp(25px, 7.5vw, 34px);
-      }
-
-      .compact-title h1 {
-        font-size: clamp(22px, 6.4vw, 28px);
-      }
-
-      .content {
-        grid-template-columns: 1fr;
-      }
-
-      .chart-wrap {
-        min-height: 360px;
-      }
-
-      .interactive-content {
-        padding-left: 24px;
-        padding-right: 24px;
-        min-height: 620px;
-      }
-
-      .strategy-content {
-        grid-template-columns: 1fr;
-        padding-left: clamp(14px, 5vw, 24px);
-        padding-right: clamp(14px, 5vw, 24px);
-      }
-
-      .premise-content {
-        padding: 16px clamp(14px, 5vw, 22px) 92px;
-        gap: 12px;
-        align-content: start;
-      }
-
-      .premise-group {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .premise-group-header {
-        padding: 16px 18px;
-        gap: 6px;
-        font-size: clamp(17px, 4.8vw, 21px);
-        min-height: 0;
-      }
-
-      .premise-group-title {
-        font-size: clamp(30px, 9vw, 42px);
-      }
-
-      .premise-box-grid {
-        gap: 8px;
-      }
-
-      .premise-asset-line {
-        grid-template-columns: minmax(92px, 0.34fr) minmax(0, 1fr);
-        gap: 8px;
-      }
-
-      .premise-box {
-        min-height: 48px;
-        padding: 8px 10px;
-      }
-
-      .premise-box-name {
-        font-size: clamp(15px, 4.4vw, 19px);
-      }
-
-      .premise-box-type {
-        font-size: 10px;
-      }
-
-      .premise-point {
-        min-height: 48px;
-        padding: 9px 10px 9px 24px;
-        font-size: clamp(13px, 3.8vw, 16px);
-      }
-
-      .wealth-definition {
-        padding: 36px 24px 28px;
-        gap: 22px;
-      }
-
-      .wealth-question {
-        min-height: 52vh;
-      }
-
-      .wealth-line,
-      .wealth-question .wealth-line {
-        font-size: clamp(42px, 12vw, 68px);
-      }
-
-      .wealth-definition-fixed {
-        min-height: auto;
-      }
-
-      .wealth-expanded-row {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-
-      .wealth-expanded-line {
-        white-space: normal;
-        font-size: 25px;
-      }
-
-      .feedback-content {
-        grid-template-columns: 1fr;
-        padding: 22px 24px 20px;
-      }
-
-      .feedback-card,
-      .feedback-side-card {
-        padding: 20px;
-      }
-
-      .feedback-card h2,
-      .feedback-side-card h2 {
-        font-size: 26px;
-      }
-
-      .feedback-card p,
-      .feedback-side-card p {
-        font-size: 17px;
-      }
-
-      .feedback-box {
-        min-height: 190px;
-        font-size: 16px;
-      }
-
-      .feedback-button,
-      .repo-star-link {
-        width: 100%;
-      }
-
-      .asset-detail,
-      .asset-main,
-      .gold-vehicle-box,
-      .placeholder-main,
-      .hedge-placeholder,
-      .pevc-main,
-      .platform-main,
-      .feedback-content,
-      .public-alt-main,
-      .bitcoin-layout,
-      .fi-issuer-main,
-      .fi-htm-main,
-      .estate-bottom {
-        grid-template-columns: 1fr;
-      }
-
-      .asset-detail {
-        padding: 14px clamp(14px, 5vw, 24px) 92px;
-        gap: 12px;
-      }
-
-      .asset-menu {
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-        padding-right: 0;
-        padding-bottom: 14px;
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .asset-tab,
-      .sub-tab,
-      .nested-sub-tab {
-        flex: 0 0 auto;
-        min-width: max-content;
-      }
-
-      .footer {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding-bottom: 92px;
-      }
-
-      .footer > div:last-child {
-        max-width: none;
-        text-align: left;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .header {
-        gap: 10px;
-        padding-top: 18px;
-        padding-bottom: 9px;
-      }
-
-      .kicker {
-        font-size: 11px;
-      }
-
-      .premise-asset-line {
-        grid-template-columns: 1fr;
-      }
-
-      .premise-point {
-        padding-left: 22px;
       }
     }
 
@@ -5391,6 +5175,24 @@
 
       deck.classList.add('presentation-mode');
 
+      const updateMobileScale = () => {
+        const isMobile = window.matchMedia('(max-width: 920px)').matches;
+        if (!isMobile) {
+          deck.style.removeProperty('--mobile-slide-scale');
+          return;
+        }
+        const viewport = window.visualViewport || window;
+        const viewportWidth = viewport.width || window.innerWidth;
+        const viewportHeight = viewport.height || window.innerHeight;
+        const fitWidth = viewportWidth / 1440;
+        const fitHeight = Math.max(0.28, (viewportHeight - 108) / 810);
+        const scale = Math.min(1, Math.max(fitWidth, Math.min(0.72, fitHeight)));
+        deck.style.setProperty('--mobile-slide-scale', scale.toFixed(4));
+      };
+      updateMobileScale();
+      window.addEventListener('resize', updateMobileScale);
+      window.visualViewport?.addEventListener('resize', updateMobileScale);
+
       const controls = document.createElement('nav');
       controls.className = 'presentation-controls';
       controls.setAttribute('aria-label', 'Slide navigation');
@@ -5424,6 +5226,9 @@
         nextButton.disabled = current === slides.length - 1;
         if (updateHash) {
           history.replaceState(null, '', `#slide-${current + 1}`);
+        }
+        if (window.matchMedia('(max-width: 920px)').matches) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         }
       };
 
@@ -5474,6 +5279,7 @@
       document.addEventListener('touchend', (event) => {
         if (!event.changedTouches.length) return;
         if (event.target.closest('a, button, input, textarea, select, iframe')) return;
+        if (document.documentElement.scrollWidth > window.innerWidth + 12) return;
         const dx = event.changedTouches[0].clientX - touchStartX;
         const dy = event.changedTouches[0].clientY - touchStartY;
         if (Math.abs(dx) < 52 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
