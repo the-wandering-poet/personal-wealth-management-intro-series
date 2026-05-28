@@ -9,8 +9,10 @@
     :root {
       --ink: #182025;
       --muted: #5d6970;
-      --paper: #fbf7f2;
-      --panel: #fffdf8;
+      --paper: #ffffff;
+      --panel: #ffffff;
+      --feedback-paper: #fbf7f2;
+      --feedback-panel: #fffdf8;
       --line: #e7ddd2;
       --accent: #0d5f4c;
       --gold: #b8860b;
@@ -29,7 +31,7 @@
       margin: 0;
       min-height: 100vh;
       color: var(--ink);
-      background: #efe8df;
+      background: #ffffff;
       font-family: Inter, Arial, Helvetica, sans-serif;
       overflow: auto;
     }
@@ -440,13 +442,17 @@
       align-items: stretch;
     }
 
+    .feedback-slide {
+      background: var(--feedback-paper);
+    }
+
     .feedback-card,
     .feedback-side-card {
       min-width: 0;
       min-height: 0;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: var(--panel);
+      background: var(--feedback-panel);
       padding: 24px 28px;
       display: grid;
       align-content: start;
@@ -4972,7 +4978,7 @@
       </footer>
     </section>
 
-    <section class="slide compact-title" aria-label="Feedback collection">
+    <section class="slide compact-title feedback-slide" aria-label="Feedback collection">
       <header class="header">
         <div>
           <p class="kicker">Feedback</p>
