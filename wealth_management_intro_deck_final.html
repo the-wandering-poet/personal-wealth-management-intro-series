@@ -547,10 +547,61 @@
       font-weight: 650;
     }
 
+    .feedback-email-form {
+      display: grid;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .feedback-email-input {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 0 14px;
+      font: 700 16px/1.25 Inter, Arial, Helvetica, sans-serif;
+    }
+
+    .feedback-email-input:focus {
+      outline: 3px solid rgba(13, 95, 76, 0.18);
+      border-color: var(--accent);
+    }
+
+    .feedback-email-form .feedback-button {
+      width: 100%;
+    }
+
     @media (max-width: 920px) {
+      .slide-frame.feedback-frame {
+        width: calc(100vw - 24px);
+        height: auto;
+        scroll-margin-top: 12px;
+      }
+
+      .slide-frame.feedback-frame > .feedback-slide {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        transform: none;
+        overflow: visible;
+      }
+
       .feedback-content {
         grid-template-columns: 1fr;
-        padding: calc(18px * var(--deck-scale, 1));
+        padding: 18px;
+        gap: 14px;
+      }
+
+      .feedback-card,
+      .feedback-side-card {
+        padding: 18px;
+      }
+
+      .feedback-box {
+        min-height: 150px;
       }
     }
 
@@ -5092,7 +5143,7 @@
         </section>
 
         <section class="feedback-side-card">
-          <h2>If this helped, star the repo</h2>
+          <h2>Please star us!</h2>
           <p>Starring helps others find the deck and lets us know the content is useful.</p>
           <a class="repo-star-link" href="https://github.com/the-wandering-poet/personal-wealth-management-intro-series" target="_blank" rel="noopener">Open GitHub repo</a>
           <ul class="feedback-mini-list">
@@ -5104,15 +5155,18 @@
 
         <section class="feedback-side-card">
           <h2>Stay updated</h2>
-          <p>Want to know when we release Part 2, or host future sessions? Drop your email here to stay updated:</p>
-          <a class="feedback-button secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSc0MCphBW0wQuGBQHagi9RNp_BtcBcZg51qMWsvTtbwhIhP4A/viewform?usp=publish-editor" target="_blank" rel="noopener">Open update form</a>
-          <div class="feedback-note">Use this form if you would like future updates or session announcements.</div>
+          <p>Want to know when we release Part 2, or host future sessions? Drop your email here to stay updated;</p>
+          <form class="feedback-email-form" id="deck-update-form">
+            <input class="feedback-email-input" id="deck-update-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            <button class="feedback-button secondary" type="submit">Submit</button>
+          </form>
+          <div class="feedback-note" id="deck-update-note">Emails submit directly to the update Google Form.</div>
         </section>
       </div>
 
       <footer class="footer">
         <div><span class="brand">Wealth Management Primer</span></div>
-        <div>Feedback is collected through GitHub issues; no hidden form backend is used.</div>
+        <div>Comments go through GitHub issues; update emails submit to Google Forms.</div>
       </footer>
     </section>
 
@@ -5212,6 +5266,9 @@
       const frames = slides.map((slide, slideIndex) => {
         const frame = document.createElement('div');
         frame.className = 'slide-frame';
+        if (slide.classList.contains('feedback-slide')) {
+          frame.classList.add('feedback-frame');
+        }
         frame.id = `slide-${slideIndex + 1}`;
         frame.setAttribute('aria-label', slide.getAttribute('aria-label') || `Slide ${slideIndex + 1}`);
         slide.removeAttribute('id');
@@ -5324,6 +5381,44 @@
         }
       });
       updateIssueLink();
+    })();
+
+    (() => {
+      const form = document.querySelector('#deck-update-form');
+      const emailInput = document.querySelector('#deck-update-email');
+      const note = document.querySelector('#deck-update-note');
+      if (!form || !emailInput || !note) return;
+
+      const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc0MCphBW0wQuGBQHagi9RNp_BtcBcZg51qMWsvTtbwhIhP4A/formResponse';
+      const emailField = 'entry.1965520665';
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const email = emailInput.value.trim();
+        if (!email || !emailInput.checkValidity()) {
+          note.textContent = 'Please enter a valid email address.';
+          emailInput.focus();
+          return;
+        }
+
+        const body = new FormData();
+        body.append(emailField, email);
+
+        note.textContent = 'Submitting...';
+        try {
+          await fetch(googleFormUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body
+          });
+          emailInput.value = '';
+          note.textContent = 'Thank you. You are on the update list.';
+        } catch {
+          const fallback = 'https://docs.google.com/forms/d/e/1FAIpQLSc0MCphBW0wQuGBQHagi9RNp_BtcBcZg51qMWsvTtbwhIhP4A/viewform?usp=pp_url&entry.1965520665=' + encodeURIComponent(email);
+          note.innerHTML = 'Submission did not finish. <a href="' + fallback + '" target="_blank" rel="noopener">Open the Google Form instead.</a>';
+        }
+      });
     })();
 
     document.querySelectorAll('[data-wealth-animation]').forEach((container) => {
